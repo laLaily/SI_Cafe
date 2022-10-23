@@ -58,3 +58,9 @@ footer{
 footer h1{
     padding: 5px;
 }
+
+@media (max-width:600px) {
+    .judul{
+        display: none;
+    }
+}
