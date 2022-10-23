@@ -55,11 +55,15 @@
     flex-wrap: wrap;
     justify-content: space-evenly;
     align-items: center;
+    gap: 10px;
 }
 
 .reservation{
     flex: 1;
     padding: 20px;
+    background-color: #EED6C4;
+    border: 5px solid #FFF3E4;
+    border-radius: 10px;
 }
 
 .reservation h2{
@@ -68,19 +72,25 @@
 }
 
 .reservation p {
-    margin: 10px;
+    margin: 10px 10px 20px 10px;
     text-align: justify;
 }
 
 .reservation a {
-    margin: 20px;
-    padding: 20px;
-    text-align: center;
+    margin: 40%;
+    padding: 10px;
+    color: #FFF3E4;
+    background-color: #483434;
+    border: 2px solid #FFF3E4;
+    border-radius: 5px;
 }
 
 .dine {
     flex: 1;
     padding: 20px;
+    background-color: #EED6C4;
+    border: 5px solid #FFF3E4;
+    border-radius: 10px;
 }
 
 .dine h2 {
@@ -89,12 +99,15 @@
 }
 
 .dine p {
-    margin: 10px;
+    margin: 10px 10px 20px 10px;
     text-align: justify;
 }
 
 .dine a {
-    margin: 20px;
-    padding: 20px;
-    text-align: center;
+    margin: 40%;
+    padding: 10px;
+    color: #FFF3E4;
+    background-color: #483434;
+    border: 2px solid #FFF3E4;
+    border-radius: 5px;
 }
