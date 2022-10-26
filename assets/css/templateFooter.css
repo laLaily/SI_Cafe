@@ -1,0 +1,17 @@
+*{
+    margin: 0;
+    font-family: sans-serif;
+    text-decoration: none;
+}
+
+footer{
+    background-color: #483434;
+    color: #EED6C4;
+    font-weight: bold;
+    font-size: 8px;
+    text-align: center;
+}
+
+footer h1{
+    padding: 5px;
+}
