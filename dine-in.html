@@ -4,25 +4,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dine In</title>
-    <link rel="stylesheet" href="./assets/template.css">
-    <style>
-        
+    <link rel="stylesheet" href="./assets/css/templateHeader.css">
+    <style>        
         .menu{
             display: grid;
-            display: inline-block;
-            flex-direction: row;
-            border: 2px;
-            border-radius: 10px;
-            /* border-style: solid;
-            border-color: #483434; */
-            width: 100%;
-            height: 1000px;
-            right: 10px;
-            left: 10px;
-            justify-content: space-between;
-            align-items: center;
+            gap: 10px;
             box-sizing: border-box;
-            grid-template-columns: auto auto auto; 
+            grid-template-columns: auto auto auto auto;
+            margin-left: 75px;
         }
         .daftarMenu{
             position: relative;
@@ -30,35 +19,23 @@
             border-radius: 10px;
             font-family: "Georgia", serif;
             width: 200px;
-            height: 300px;
+            height: 320px;
             display: inline-block;
-            border: 2px;
             border-radius: 10px;
-            border-style: solid;
-            border-color: #483434;
+            border: 2px solid #483434;
             box-sizing: border-box;
-            padding-top: 10px;
-            padding-left: 10px;
-            padding-right: 10px;
-            padding-bottom: 10px;
-            top: 40px;
-            right: 90px;
-            left: 90px;
-            bottom: 40px;
+            padding: 10px;
             text-align: center;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
             margin-bottom: 25px;
-            margin-right: 15px;
         }
         button{
             border-radius: 8px;
             color: #000;
             background-color: #EED6C4;
-            font-size: medium;
-            
+            font-size: medium;    
         }
-        img{
-            /* box-sizing: border-box; */
+        .image{
             width: 150px;
             border-radius: 8px;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -77,24 +54,22 @@
             border-radius: 8px;
             border-color: #483434;
             border: 2px solid #483434;
-            
         }
-        img.c{
+        .c{
             width: 80px;
             height: 80px;
-            
+            border-radius: 50%;
         }
         .atas{
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
-            
         }
         .cart{
             margin-right: 130px;
-            
         }
     </style>
+    <link rel="stylesheet" href="./assets/css/templateFooter.css">
 </head>
 <body>
     <header>
@@ -117,7 +92,7 @@
         <br><br>
         <div class="menu">
             <div class="daftarMenu">
-                <img src="./assets/Menu Images/Mac and Cheese.png" alt="">
+                <img class="image" src="./assets/Menu Images/Mac and Cheese.png" alt="">
                 <br><br>
                 Mac and Cheese<br><br>
                 Lorem ipsum dolor sit amet consectetur.
@@ -125,7 +100,7 @@
                 <button>Add to Cart</button>
             </div>
             <div class="daftarMenu">
-                <img src="./assets/Menu Images/Baked French Fries.png" alt="">
+                <img class="image" src="./assets/Menu Images/Baked French Fries.png" alt="">
                 <br><br>
                 Baked French Fries<br><br>
                 Lorem ipsum dolor sit amet consectetur.
@@ -133,7 +108,7 @@
                 <button>Add to Cart</button>
             </div>
             <div class="daftarMenu">
-                <img src="./assets/Menu Images/Bluberry Pie.png" alt="">
+                <img class="image" src="./assets/Menu Images/Bluberry Pie.png" alt="">
                 <br><br>
                 Bluberry Pie<br><br>
                 Lorem ipsum dolor sit amet consectetur.
@@ -141,7 +116,7 @@
                 <button>Add to Cart</button>
             </div>
             <div class="daftarMenu">
-                <img src="./assets/Menu Images/Berries Puding.png" alt="">
+                <img class="image" src="./assets/Menu Images/Berries Puding.png" alt="">
                 <br><br>
                 Berries Puding<br><br>
                 Lorem ipsum dolor sit amet consectetur.
@@ -149,7 +124,7 @@
                 <button>Add to Cart</button>
             </div>
             <div class="daftarMenu">
-                <img src="./assets/Menu Images/Strip Steak.png" alt="">
+                <img class="image" src="./assets/Menu Images/Strip Steak.png" alt="">
                 <br><br>
                 Strip Steak<br><br>
                 Lorem ipsum dolor sit amet consectetur.
@@ -157,7 +132,7 @@
                 <button>Add to Cart</button>
             </div>
             <div class="daftarMenu"> 
-                <img src="./assets/Menu Images/Red Velvet Cake.png" alt="">
+                <img class="image" src="./assets/Menu Images/Red Velvet Cake.png" alt="">
                 <br><br>
                 Red Velvet Cake<br><br>
                 Lorem ipsum dolor sit amet consectetur.
@@ -165,7 +140,7 @@
                 <button>Add to Cart</button>
             </div>
             <div class="daftarMenu">
-                <img src="./assets/Menu Images/Mango Smoothie.png" alt="">
+                <img class="image" src="./assets/Menu Images/Mango Smoothie.png" alt="">
                 <br><br>
                 Mango Smoothie<br><br>
                 Lorem ipsum dolor sit amet consectetur.
@@ -173,7 +148,7 @@
                 <button>Add to Cart</button>
             </div>
             <div class="daftarMenu">
-                <img src="./assets/Menu Images/Strawberry Juice.png" alt="">
+                <img class="image" src="./assets/Menu Images/Strawberry Juice.png" alt="">
                 <br><br>
                 Strawberry Juice<br><br>
                 Lorem ipsum dolor sit amet consectetur.
@@ -181,7 +156,7 @@
                 <button>Add to Cart</button>
             </div>
             <div class="daftarMenu"> 
-                <img src="./assets/Menu Images/Chocolates Sundae.png" alt="">
+                <img class="image" src="./assets/Menu Images/Chocolates Sundae.png" alt="">
                 <br><br>
                 Chocolate Sundae<br><br>
                 Lorem ipsum dolor sit amet consectetur.
@@ -189,7 +164,7 @@
                 <button>Add to Cart</button>
             </div>
             <div class="daftarMenu"> 
-                <img src="./assets/Menu Images/Matcha Boba.png" alt="">
+                <img class="image" src="./assets/Menu Images/Matcha Boba.png" alt="">
                 <br><br>
                 Matcha Boba<br><br>
                 Lorem ipsum dolor sit amet consectetur.
@@ -197,7 +172,7 @@
                 <button>Add to Cart</button>
             </div>
             <div class="daftarMenu"> 
-                <img src="./assets/Menu Images/Coffee Latte.png" alt="">
+                <img class="image" src="./assets/Menu Images/Coffee Latte.png" alt="">
                 <br><br>
                 Coffee Latte<br><br>
                 Lorem ipsum dolor sit amet consectetur.
@@ -205,14 +180,13 @@
                 <button>Add to Cart</button>
             </div>
             <div class="daftarMenu"> 
-                <img src="./assets/Menu Images/Dalgona Coffee.png" alt="">
+                <img class="image" src="./assets/Menu Images/Dalgona Coffee.png" alt="">
                 <br><br>
                 Dalgona Coffee<br><br>
                 Lorem ipsum dolor sit amet consectetur.
                 <br><br>
                 <button>Add to Cart</button>
-            </div>
-            
+            </div>  
         </div>
     </main>
     <br><br>
