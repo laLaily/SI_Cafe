@@ -69,70 +69,61 @@
 }
 
 .reservation{
-    flex: 1;
+    height: auto;
+    width: 700px;
     padding: 20px 10px;
     background-color: #EED6C4;
     border: 5px solid #FFF3E4;
     border-radius: 10px;
-}
-
-.reservation h2{
-    margin: 10px;
-    text-align: center;
-}
-
-.reservation p {
-    margin: 10px 10px 20px 10px;
-    text-align: justify;
-}
-
-.reservation a {
-    padding: 10px;
-    margin-left: 45%;
-    color: #FFF3E4;
-    background-color: #483434;
-    border: 2px solid #FFF3E4;
-    border-radius: 5px;
 }
 
 .dine {
-    flex: 1;
+    height: auto;
+    width: 700px;
     padding: 20px 10px;
     background-color: #EED6C4;
     border: 5px solid #FFF3E4;
     border-radius: 10px;
 }
 
-.dine h2 {
+.head {
     margin: 10px;
     text-align: center;
 }
 
-.dine p {
-    margin: 10px 10px 20px 10px;
+.par {
+    margin: 20px;
     text-align: justify;
 }
 
-.dine a {
+.reservation .link {
+    margin-top: 40px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.dine .link{
+    margin-top: 58px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.link a {
     padding: 10px;
-    margin-left: 45%;
     color: #FFF3E4;
     background-color: #483434;
     border: 2px solid #FFF3E4;
     border-radius: 5px;
 }
 
-
-.dine a:hover{
+.link a:hover{
     background-color: #FFF3E4;
     border: 2px solid #483434;
     color: #483434;
-    font-weight: bold;
 }
 
 .reservation a:hover {
     background-color: #FFF3E4;
     border: 2px solid #483434;
     color: #483434;
-    font-weight: bold;
 }
