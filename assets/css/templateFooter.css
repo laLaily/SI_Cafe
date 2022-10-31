@@ -1,10 +1,11 @@
 *{
     margin: 0;
-    font-family: Georgia;
+    font-family: "Comic sans ms";
     text-decoration: none;
 }
 
 footer{
+    position: relative;
     background-color: #483434;
     color: #EED6C4;
     font-weight: bold;
