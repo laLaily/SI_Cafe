@@ -118,7 +118,7 @@
 
 .link a:hover{
     background-color: #FFF3E4;
-    border: 2px solid #483434;
+    border-color: #483434;
     color: #483434;
 }
 
