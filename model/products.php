@@ -2,40 +2,42 @@
 
 require_once __DIR__ . '/koneksi.php';
 
-function getProducts(): PDOStatement
+function getProducts(): array
 {
     $conn = getConnection();
-    $sql = "select * from products";
-    $stat = $conn->query($sql);
-
-    $conn=null;
-
-    return $stat;
-}
-
-function getFilteredProducts($kategori): PDOStatement
-{
-    $conn = getConnection();
-    $sql = "select * from products where pcategory='?'";
-    $stat = $conn->prepare($sql);
-    $stat->bindParam(1,$kategori);
-    $stat->execute();
+    $sql = "SELECT * FROM products;";
+    $stmt = $conn->query($sql);
+    $row = $stmt->fetchAll();
 
     $conn = null;
 
-    return $stat;
+    return $row;
 }
 
-function getProductById($id): PDOStatement
+function getFilteredProducts($kategori): array
 {
     $conn = getConnection();
-    $sql = "select * from products where id='?'";
-    $stat = $conn->prepare($sql);
-    $stat->bindParam(1,$id);
-    $stat->execute();
+    $sql = "SELECT * FROM products WHERE pcategory=?;";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(1, $kategori);
+    $stmt->execute();
+    $row = $stmt->fetchAll();
 
     $conn = null;
 
-    return $stat;
+    return $row;
 }
 
+function getProductById($id): array
+{
+    $conn = getConnection();
+    $sql = "SELECT * FROM products WHERE id=?;";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(1, $id);
+    $stmt->execute();
+    $row = $stmt->fetchAll();
+
+    $conn = null;
+
+    return $row;
+}
