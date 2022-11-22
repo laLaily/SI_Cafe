@@ -1,5 +1,18 @@
 <?php 
 require_once __DIR__ . '/model/koneksi.php';
+$conn = getConnection();
+if ($_SERVER["REQUEST_METHOD"] == "POST"){
+    $n = $_POST["name"];
+    $c = $_POST["cat"];
+    $s = $_POST["stock"];
+    $pr = $_POST["price"];
+    $p = $_POST["path"];
+    
+    $sql="insert into products (pname,pcategory,pstock,pprice,ppath) values (?,?,?,?,?)";
+    $result=$conn->prepare($sql);
+    $result->execute([$n,$c,$s,$pr,$p]);
+}
+$conn = null;
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +24,8 @@ require_once __DIR__ . '/model/koneksi.php';
     <title>Admin-Menu</title>
 </head>
 <body>
-<table>
+    
+    <table>
         <th>Id</th>
         <th>Menu</th>
         <th>Kategori</th>
@@ -41,8 +55,24 @@ require_once __DIR__ . '/model/koneksi.php';
         } else {
             echo "0 result";
         }
-        $conn=null;
+        $conn=null; 
         ?>
     </table>
+
+    <div>
+        <form id="form" method="POST"> 
+            <label>Menu</label><br>
+            <input type="text" name="name" size="40%"><br>   
+            <label>Category</label><br>
+            <input type="text" name="cat" size="40%"><br>
+            <label>Stock</label><br>
+            <input type="text" name="stock" size="40%"><br>
+            <label>Price</label><br>
+            <input type="text" name="price" size="40%"><br>
+            <label>Path</label><br>
+            <input type="text" name="path" size="40%"><br>  
+            <button type="submit" class="book" form="form">Add Menu</button>
+        </form>
+    </div>
 </body>
 </html>
