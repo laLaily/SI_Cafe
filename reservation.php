@@ -7,7 +7,7 @@
     <title>Reservation Form</title>
     <link rel="stylesheet" href="./assets/css/templateHeader.css">
 </head>
-<body style="padding:0; margin:0; font-family:Georgia; background-image:url('./assets/images/bg1.jpg'); background-size:cover; color: #fff;">
+<body style="padding:0; margin:0; font-family:sans-serif; background: #EED6C4 ; background-size:cover; color: #fff;">
     <header>
         <div class="logo">
             <a href="./landingPage.html"><img src="" alt="logo-cafe"></a>
@@ -31,6 +31,8 @@
                 <input style="font-size: 16px; padding:15px; width:100%; border:0; border-radius: 5px; outline: none;" type="date" name="Hari">
                 <p  style="font-size: 20px; margin:15px 0;">Jam :</p>
                 <input style="font-size: 16px; padding:15px; width:100%; border:0; border-radius: 5px; outline: none;" type="text" name="Jam">
+                <p  style="font-size: 20px; margin:15px 0;">Jumlah Orang :</p>
+                <input style="font-size: 16px; padding:15px; width:100%; border:0; border-radius: 5px; outline: none;" type="text" name="Jumlah Orang">
                 <button style="font-size: 18px; font-weight:bold; margin: 20px 20px 20px 120px; padding: 10px 15px; width: 50%; border: 0; border-radius: 5px; background-color: #fff;" type="submit">Reservation</button>
             </form>    
         </div>
