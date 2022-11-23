@@ -84,7 +84,7 @@
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi nesciunt aut ipsum quis, autem id totam eaque neque veniam adipisci quibusdam assumenda explicabo similique sit modi? Quod molestias maiores dolorem suscipit illum nesciunt, corrupti modi a sapiente sint molestiae dolore qui officiis, totam dolores consequatur eveniet! Assumenda ipsam sed unde!</p>
                 </div>
                 <div class="link">
-                    <a href="./dine-in.php">Learn More</a>
+                    <a href="./regisDine-in.php">Learn More</a>
                 </div>
             </div>
         </section>

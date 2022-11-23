@@ -39,6 +39,19 @@ require_once __DIR__ . '/model/products.php';
             border: 2px solid brown;
             flex: 1;
         }
+
+        .dinetrx {
+            margin: 10px;
+        }
+
+        .refresh {
+            text-align: right;
+            margin: 10px;
+        }
+
+        .filter {
+            margin: 10px;
+        }
     </style>
 </head>
 
@@ -109,7 +122,22 @@ require_once __DIR__ . '/model/products.php';
                 </div>
             </div>
             <div class="trx">
-                <div>
+                <div class="dinetrx">
+                    <?php $data = viewDineInTransaction($_SESSION['dntrxid']) ?>
+                    <p>Name : <?= $data['dncustomername'] ?></p>
+                    <p>Seat : <?= $data['snumber'] ?></p>
+                    <p>Date : <?= $data['dntrxdate'] ?></p>
+                    <p>Total Price : <?= $data['totalPrice'] ?></p>
+                    <form action="./status.php" method="post">
+                        <?php if (sizeof(getAllProductCart($_SESSION['dntrxid'])) != 0) : ?>
+                            <input type="hidden" name="status" value="transaction success">
+                        <?php else : ?>
+                            <input type="hidden" name="status" value="transaction failed, input product first!">
+                        <?php endif; ?>
+                        <button>confirm</button>
+                    </form>
+                </div>
+                <div class="refresh">
                     <a href="./dine-in.php">refresh</a>
                 </div>
                 <div class="listMenu" style="list-style: none;">
@@ -157,7 +185,6 @@ require_once __DIR__ . '/model/products.php';
     <script>
         const btnAdd = document.getElementsByClassName('check');
         for (let add of btnAdd) {
-
             add.onclick = function() {
                 if (add.checked == true) {
                     document.querySelector(`.qty-${add.value}`).style.display = 'inline';
@@ -166,13 +193,6 @@ require_once __DIR__ . '/model/products.php';
                 }
             }
         }
-
-        // const addBtn = document.getElementsByClassName('addData');
-        // for (let btn of addBtn) {
-        //     btn.onclick = (e) => {
-        //         e.preventDefault();
-        //     }
-        // }
     </script>
 </body>
 
@@ -223,6 +243,21 @@ function getDineinTransaction($trxid)
     $conn = getConnection();
 
     $sql = "SELECT * FROM dineintransaction WHERE dntrxid=?;";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(1, $trxid);
+    $stmt->execute();
+    $row = $stmt->fetch();
+
+    $conn = null;
+
+    return $row;
+}
+
+function viewDineInTransaction($trxid)
+{
+    $conn = getConnection();
+
+    $sql = "SELECT d.dncustomername, s.snumber, d.dntrxdate, d.totalPrice FROM dineintransaction AS d INNER JOIN seat AS s ON s.sid=d.dnsid WHERE dntrxid=?;";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(1, $trxid);
     $stmt->execute();
