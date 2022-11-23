@@ -2,14 +2,23 @@
 
 require_once __DIR__ . '/koneksi.php';
 
+session_start();
+
+if (isset($_POST['addDineInTrx'])) {
+    insertTrx($_POST);
+    $row = getIdDineinTransaction($_POST['dncustomername'], $_POST['dnsid']);
+    $_SESSION['dntrxid'] = $row['dntrxid'];
+    $_SESSION['dnsid'] = $_POST['dnsid'];
+}
+
 function insertTrx($data)
 {
     $conn = getConnection();
 
-    $sql = "INSERT INTO dineintransaction(dnsid,customername) VALUES(?,?);";
+    $sql = "INSERT INTO dineintransaction(dnsid,dncustomername) VALUES(?,?);";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(1, $data["dnsid"]);
-    $stmt->bindParam(2, $data["customername"]);
+    $stmt->bindParam(2, $data["dncustomername"]);
     $stmt->execute();
 
     $conn = null;
@@ -19,7 +28,7 @@ function getIdDineinTransaction($username, $sid): array
 {
     $conn = getConnection();
 
-    $sql = "SELECT id FROM dineintransaction WHERE customername=? AND dnsid=? ORDER BY dndate DESC LIMIT 1;";
+    $sql = "SELECT dntrxid FROM dineintransaction WHERE dncustomername=? AND dnsid=? ORDER BY dntrxdate DESC LIMIT 1;";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(1, $username);
     $stmt->bindParam(2, $sid);
@@ -39,7 +48,7 @@ function getDineinTransaction($trxid): array
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(1, $trxid);
     $stmt->execute();
-    $row = $stmt->fetch();
+    $row = $stmt->fetchAll();
 
     $conn = null;
 

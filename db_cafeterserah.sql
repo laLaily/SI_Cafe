@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 19, 2022 at 05:51 AM
--- Server version: 10.4.25-MariaDB
--- PHP Version: 8.1.10
+-- Generation Time: Nov 23, 2022 at 07:15 AM
+-- Server version: 10.1.36-MariaDB
+-- PHP Version: 7.0.32
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -55,6 +56,19 @@ CREATE TABLE `detail_dineintransaction` (
   `qty_price` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `detail_dineintransaction`
+--
+
+INSERT INTO `detail_dineintransaction` (`dtrxid`, `dpid`, `qty`, `qty_price`) VALUES
+(1, 1, 10, 487000),
+(1, 2, 4, 169200),
+(1, 5, 3, 67500),
+(1, 10, 2, 50000),
+(1, 7, 1, 21500),
+(1, 13, 1, 24700),
+(1, 18, 1, 18000);
+
 -- --------------------------------------------------------
 
 --
@@ -63,12 +77,19 @@ CREATE TABLE `detail_dineintransaction` (
 
 CREATE TABLE `dineintransaction` (
   `dntrxid` int(11) NOT NULL,
-  `dntrxdate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `dntrxdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `dnsid` int(11) DEFAULT NULL,
   `dncustomername` varchar(50) NOT NULL,
-  `totalPrice` int(11) NOT NULL,
-  `dnadminid` int(11) NOT NULL
+  `totalPrice` int(11) NOT NULL DEFAULT '0',
+  `dnadminid` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `dineintransaction`
+--
+
+INSERT INTO `dineintransaction` (`dntrxid`, `dntrxdate`, `dnsid`, `dncustomername`, `totalPrice`, `dnadminid`) VALUES
+(1, '2022-11-23 06:00:29', 1, 'lili', 837900, NULL);
 
 -- --------------------------------------------------------
 
@@ -118,7 +139,7 @@ INSERT INTO `products` (`pid`, `pname`, `pcategory`, `pstock`, `pprice`, `ppath`
 CREATE TABLE `reservationtransaction` (
   `rtrxid` int(11) NOT NULL,
   `rname` varchar(100) NOT NULL,
-  `rdate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `rdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `rnotelp` varchar(14) NOT NULL,
   `rdtrxid` int(11) DEFAULT NULL,
   `rstatus` enum('reserved','used','done') NOT NULL DEFAULT 'reserved'
@@ -227,7 +248,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `dineintransaction`
 --
 ALTER TABLE `dineintransaction`
-  MODIFY `dntrxid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `dntrxid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `products`
