@@ -297,43 +297,6 @@ function insertCart($data)
     $conn = null;
 }
 
-// function UpdateCart($data)
-// {
-//     $conn = getConnection();
-
-//     $cart = getProductCart($data["dntrxid"], $data["dpid"]);
-
-//     if ($cart["qty"] > 1) {
-//         $qty = $cart["qty"] - 1;
-//         $qty_price = $cart["qty_price"] * ($cart["qty"] - 1);
-
-//         $conn->beginTransaction();
-
-//         $sql = "UPDATE detail_dineintransaction SET qty=? AND qty_price=? WHERE dtrxid=? AND dpid=?;";
-//         $stmt = $conn->prepare($sql);
-//         $stmt->bindParam(1, $qty);
-//         $stmt->bindParam(2, $qty_price);
-//         $stmt->bindParam(3, $data["dntrxid"]);
-//         $stmt->bindParam(4, $data["dpid"]);
-//         $stmt->execute();
-
-//         $trx = getDineinTransaction($data["dntrxid"]);
-//         $price = $trx["totalPrice"] - $cart["qty_price"];
-
-//         $sql = "UPDATE dineintransaction SET totalPrice=? WHERE dntrxid=?;";
-//         $stmt = $conn->prepare($sql);
-//         $stmt->bindParam(1, $price);
-//         $stmt->bindParam(2, $data["dntrxid"]);
-//         $stmt->execute();
-
-//         $conn->commit();
-//     } else {
-//         DeleteCart($data);
-//     }
-
-//     $conn = null;
-// }
-
 function deleteCart($data)
 {
     $conn = getConnection();
