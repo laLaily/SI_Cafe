@@ -29,6 +29,11 @@ $conn = null;
 </head>
 
 <body>
+    <header>
+        <div class="judul">
+            <h1>DATA PRODUCT</h1>
+        </div>
+    </header>
     <div class="all">
         <div class="kiri">
             <table>

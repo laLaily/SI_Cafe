@@ -1,11 +1,19 @@
 .all{
     display: flex;
     flex-direction: row;
+    
+}
+
+.judul{
+    background: blueviolet;
+    padding: 10px;
+    text-align: center;
 }
 .kiri{
     display: inline-block;
     width: 70%;
     border: solid red;
+    
 }
 .kanan{
     width: 30%;
@@ -17,7 +25,7 @@ img{
     height: 90px;
 }
 th, td {
-    padding: 10px;
+    padding: 7px 17px;
     text-align: left;
     border-radius: 1px;
     border: solid magenta;

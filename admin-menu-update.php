@@ -32,9 +32,9 @@ $conn = null;
             </div>
             <form id="formres" method="POST">
                 <label>Stock</label><br>
-                <input type="number" name="stock"><br>
+                <input type="number" name="stock" value="1" min="1" max="1000"><br>
                 <label>Price</label><br>
-                <input type="number" name="price"><br>
+                <input type="number" name="price" value="10000" min="10000" max="1000000"><br>
             </form>
 
             <div class="reserv-btn">
