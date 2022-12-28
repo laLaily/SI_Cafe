@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create("admin_sessions", function (Blueprint $table) {
             $table->id();
             $table->text("token");
-            $table->foreign("admin_id")->references("id")->on("admins");
+            $table->foreignId("admin_id");
         });
     }
 

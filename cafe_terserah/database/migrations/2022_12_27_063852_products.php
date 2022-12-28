@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string("product_name");
             $table->integer("product_price");
             $table->timestamps();
+            $table->unsignedBigInteger("updater_id");
             $table->foreign("updater_id")->references("id")->on("admins");
         });
     }

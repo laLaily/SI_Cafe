@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string("seat_number");
             $table->string("seat_type");
             $table->timestamps();
-            $table->foreign("admin_id")->references("id")->on("seats");
+            $table->foreignId("admin_id");
         });
     }
 

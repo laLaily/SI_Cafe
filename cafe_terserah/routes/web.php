@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::post('/admin/create', [AdminController::class, 'insertAdmin']);
+
+Route::get('/admin', [AdminController::class, 'getAdmins']);
+
+Route::get('/admin/{id}', [AdminController::class, 'getAdmin']);
+
+Route::post('/admin/change/password/{id}', [AdminController::class, 'updatePasswordAdmin']);
+
+Route::post('/admin/delete/{id}', [AdminController::class, 'deleteAdmin']);
+
+Route::post('/admin/login', [AdminController::class, 'loginAdmin']);

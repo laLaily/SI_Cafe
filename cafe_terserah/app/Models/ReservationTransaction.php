@@ -15,6 +15,8 @@ class ReservationTransaction extends Model
         "total_person",
     ];
 
+    public $timestamps = false;
+
     public function dineinTrxx()
     {
         return $this->belongsTo(DineInTransaction::class);

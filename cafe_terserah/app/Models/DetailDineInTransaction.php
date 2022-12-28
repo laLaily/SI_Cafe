@@ -15,4 +15,6 @@ class DetailDineInTransaction extends Model
         "quantity",
         "quantity_price",
     ];
+
+    public $timestamps = false;
 }

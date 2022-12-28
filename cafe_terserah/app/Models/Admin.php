@@ -18,6 +18,8 @@ class Admin extends Model
         "passowrd",
     ];
 
+    public $timestamps = false;
+
     public function seat()
     {
         return $this->hasMany(Seat::class);

@@ -15,6 +15,8 @@ class DineInTransaction extends Model
         "total_price",
     ];
 
+    public $timestamps = false;
+
     public function detailTrx()
     {
         return $this->hasMany(DetailDineInTransaction::class);
