@@ -1,0 +1,55 @@
+*{
+    margin: 0;
+    font-family: "Comic sans ms";
+    text-decoration: none;
+}
+
+header{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    background-color: #483434;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+}
+
+.judul{
+    color: #FFF3E4;
+    margin: 5px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.logo{
+    margin: 15px;
+    
+}
+
+.galeri{
+    margin: 15px;
+}
+
+.galeri a{
+    color: #483434;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 10px 20px;
+    border: 2px solid #FFF3E4;
+    border-radius: 15px;
+    background-color: #EED6C4;
+}
+
+.galeri a:hover{
+    border: 2px solid #EED6C4;
+    background-color: #6B4F4F;
+    color: #EED6C4;
+    transition: 0.5s;
+}
+
+@media (max-width:600px) {
+    .judul{
+        display: none;
+    }
+}

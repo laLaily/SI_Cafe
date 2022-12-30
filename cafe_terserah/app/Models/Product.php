@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,18 +12,27 @@ class Product extends Model
 
     protected $fillable = [
         "product_name",
+        "product_category",
         "product_price",
-        "admin_id",
+        "product_stock",
+        "updater_id",
     ];
 
     protected $hidden = [
-        "crated_at",
+        "created_at",
         "updated_at",
-        "admin_id",
+        "updater_id",
     ];
 
     public function detailProduct()
     {
         return $this->hasMany(DetailDineInTransaction::class);
+    }
+
+    public function productName(): Attribute
+    {
+        return new Attribute(
+            set: fn ($value) => strtolower($value),
+        );
     }
 }

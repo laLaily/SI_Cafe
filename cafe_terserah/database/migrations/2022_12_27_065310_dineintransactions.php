@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string("customer_name");
             $table->timestamp("transaction_date");
-            $table->foreignId("seat_id");
-            $table->integer("total_price");
+            $table->foreignId("seat_id")->constrained("seats");
+            $table->integer("total_price")->default(0);
         });
     }
 

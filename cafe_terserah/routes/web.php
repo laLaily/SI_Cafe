@@ -1,6 +1,12 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\DetailDineinTransactionController;
+use App\Http\Controllers\DineinTransactionController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SeatController;
+use App\Models\DineinTransaction;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,17 +21,42 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('order.dashboard');
 });
 
-Route::post('/admin/create', [AdminController::class, 'insertAdmin']);
+Route::get('/home', function () {
+    return view('order.dashboard');
+});
 
-Route::get('/admin', [AdminController::class, 'getAdmins']);
+Route::prefix('/admin')->group(function () {
+    Route::get('/get', [AdminController::class, 'getAdmins']);
 
-Route::get('/admin/{id}', [AdminController::class, 'getAdmin']);
+    Route::post('/create', [AdminController::class, 'insertAdmin']);
+    Route::post('/login', [AdminController::class, 'loginAdmin']);
+    Route::delete('/delete/{id}', [AdminController::class, 'deleteAdmin']);
 
-Route::post('/admin/change/password/{id}', [AdminController::class, 'updatePasswordAdmin']);
+    Route::middleware(['myauth'])->group(function () {
+        Route::get('/logout', [AdminController::class, 'logoutAdmin']);
+        Route::get('/dashboard', [AdminController::class, 'getAdmin']);
+        Route::put('/change/password/{id}', [AdminController::class, 'updatePasswordAdmin']);
 
-Route::post('/admin/delete/{id}', [AdminController::class, 'deleteAdmin']);
+        Route::prefix('/product')->group(function () {
+            Route::post('/create', [ProductController::class, 'insertProduct']);
+            Route::get('/get', [ProductController::class, 'getProducts']);
+            Route::get('/get/{id}', [ProductController::class, 'getOneProduct']);
+        });
 
-Route::post('/admin/login', [AdminController::class, 'loginAdmin']);
+        Route::prefix('/seat')->group(function () {
+            Route::post('/create', [SeatController::class, 'createSeat']);
+            Route::get('/get', [SeatController::class, 'getSeats']);
+        });
+    });
+});
+
+Route::prefix('/dinein')->group(function () {
+    Route::get('/order', [SeatController::class, 'getSeats']);
+    Route::post('/order/process', [DineinTransactionController::class, 'createDineinTransaction']);
+    Route::get('/order/products', [CartController::class, 'userCart']);
+    Route::post('/order/products/process', [DetailDineinTransactionController::class, 'createDetailDineinTrasaction']);
+    Route::get('/order/receipt', [DineinTransactionController::class, 'getDineinTransactionUserWithProduct']);
+});

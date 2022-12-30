@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string("seat_number");
             $table->string("seat_type");
             $table->timestamps();
-            $table->foreignId("admin_id");
+            $table->foreignId("admin_id")->constrained("admins");
         });
     }
 

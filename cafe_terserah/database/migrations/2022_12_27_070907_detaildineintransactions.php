@@ -14,10 +14,15 @@ return new class extends Migration
     public function up()
     {
         Schema::create("detail_dinein_transactions", function (Blueprint $table) {
-            $table->foreignId("dinein_transaction_id");
-            $table->foreignId("product_id");
+            $table->bigInteger("dinein_id")->unsigned();
+            $table->bigInteger("product_id")->unsigned();
             $table->integer("quantity");
             $table->integer("quantity_price");
+
+            $table->primary(["dinein_id", "product_id"]);
+
+            $table->foreign("dinein_id")->references("id")->on("dinein_transactions");
+            $table->foreign("product_id")->references("id")->on("products");
         });
     }
 

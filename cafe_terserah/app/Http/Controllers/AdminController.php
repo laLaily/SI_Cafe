@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -17,20 +19,20 @@ class AdminController extends Controller
 
     public function getAdmins()
     {
-        $data = Admin::all();
-        return $data->toJson();
+        $admin = Admin::all();
+        return $admin;
     }
 
-    public function getAdmin($id)
+    public function getAdmin(Request $request)
     {
-        $admin = Admin::find($id);
-        return $admin->toJson();
+        $admin = Admin::find($request->cookie('token'));
+        return view('admin.dashboard_admin', ['admin' => $admin]);
     }
 
-    public function updatePasswordAdmin(Request $request, $id)
+    public function updatePasswordAdmin(Request $request)
     {
-        $admin = Admin::find($id);
-        $admin->password = $request['password'];
+        $admin = Admin::find($request->cookie('token'));
+        $admin->password = $request->input('password');
         $admin->save();
     }
 
@@ -40,9 +42,20 @@ class AdminController extends Controller
         $admin->delete();
     }
 
-    public function loginAdmin(Request $request): int
+    public function loginAdmin(Request $request)
     {
-        $data = Admin::where('username', $request['username'])->where('password', $request['password'])->first();
-        return $data->id;
+        $admin = Admin::where('username', $request->input("username"))->first();
+
+        if (Hash::check($request->input('password'), $admin->password)) {
+            $request->session()->put('token');
+            return redirect('/admin/dashboard');
+        } else {
+            return redirect('/admin/login');
+        }
+    }
+
+    public function logoutAdmin(): Response
+    {
+        return response('')->withoutCookie('token');
     }
 }

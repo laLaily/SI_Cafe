@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string("customer_name");
             $table->timestamp("reservation_date");
             $table->integer("total_person");
-            $table->foreignId("dinein_transaction_id")->nullable();
+            $table->foreignId("dinein_transaction_id")->constrained("dinein_transactions")->nullable();
         });
     }
 

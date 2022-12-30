@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,4 +21,18 @@ class Seat extends Model
         "updated_at",
         "admin_id",
     ];
+
+    public function seatNumber()
+    {
+        return new Attribute(
+            set: fn ($value) => strtoupper($value),
+        );
+    }
+
+    public function seatType()
+    {
+        return new Attribute(
+            set: fn ($value) => strtolower($value),
+        );
+    }
 }
