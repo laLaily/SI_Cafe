@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DineinTransaction;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class DineinTransactionController extends Controller
@@ -16,6 +17,8 @@ class DineinTransactionController extends Controller
 
         $data = DineinTransaction::where('customer_name', $request->input('customer_name'))->where('seat_id', $request->input('seat_id'))->orderBy('id', 'desc')->first();
 
+        var_dump($data->id);
+
         if ($data != NULL) {
             $request->session()->put('session_token', $data->id);
             return redirect('/dinein/order/products');
@@ -24,23 +27,22 @@ class DineinTransactionController extends Controller
         }
     }
 
-    public function getDineinTransactionUserWithProduct(Request $request)
+    public function getProductTransactionUserWithProduct(Request $request)
     {
         $dinein = DineinTransaction::join('detail_dinein_transactions', 'dinein_transactions.id', '=', 'detail_dinein_transactions.dinein_id')
-            ->join('products', 'products.id', '=', 'detail_dinein_transactions.dinein_id')
-            ->select('products.product_name', 'products.product_category', 'detail_dinein_transactions.quantity', 'detail_dinein_transactions.quantity_price')
-            ->where('dinein_transactions.id', $request->cookie('session_token'))
+            ->join('products', 'products.id', '=', 'detail_dinein_transactions.product_id')
+            ->select('detail_dinein_transactions.product_id', 'products.product_name', 'detail_dinein_transactions.quantity', 'detail_dinein_transactions.quantity_price')
+            ->where('dinein_transactions.id', $request->session()->get('session_token'))
             ->get();
 
         return $dinein;
     }
 
-    public function getProductTransactionUserWithProduct(Request $request)
+    public function getDineinTransactionUserWithSeatNumber($id)
     {
-        $dinein = DineinTransaction::join('detail_dinein_transactions', 'dinein_transactions.id', '=', 'detail_dinein_transactions.dinein_id')
-            ->join('products', 'products.id', '=', 'detail_dinein_transactions.dinein_id')
-            ->select('dinein_transactions.*', 'products.*', 'detail_dinein_transactions.quantity', 'detail_dinein_transactions.quantity_price')
-            ->where('dinein_transactions.id', $request->session()->has('session_token'))
+        $dinein = DineinTransaction::join('seats', 'seats.id', '=', 'dinein_transactions.seat_id')
+            ->select('dinein_transactions.*', 'seats.seat_number')
+            ->where('dinein_transactions.id', $id)
             ->get();
 
         return $dinein;
@@ -56,6 +58,13 @@ class DineinTransactionController extends Controller
     {
         $dinein = DineinTransaction::find($id);
         $dinein->total_price += $price;
+        $dinein->save();
+    }
+
+    public function substractPrice($price, $id)
+    {
+        $dinein = DineinTransaction::find($id);
+        $dinein->total_price -= $price;
         $dinein->save();
     }
 }

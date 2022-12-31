@@ -31,7 +31,7 @@ class AdminController extends Controller
 
     public function updatePasswordAdmin(Request $request)
     {
-        $admin = Admin::find($request->cookie('token'));
+        $admin = Admin::find($request->session()->has('token'));
         $admin->password = $request->input('password');
         $admin->save();
     }
@@ -54,8 +54,9 @@ class AdminController extends Controller
         }
     }
 
-    public function logoutAdmin(): Response
+    public function logoutAdmin(Request $request)
     {
-        return response('')->withoutCookie('token');
+        $request->session()->forget('token');
+        return redirect('/admin/login');
     }
 }

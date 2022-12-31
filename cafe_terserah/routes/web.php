@@ -6,7 +6,6 @@ use App\Http\Controllers\DetailDineinTransactionController;
 use App\Http\Controllers\DineinTransactionController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SeatController;
-use App\Models\DineinTransaction;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -58,5 +57,6 @@ Route::prefix('/dinein')->group(function () {
     Route::post('/order/process', [DineinTransactionController::class, 'createDineinTransaction']);
     Route::get('/order/products', [CartController::class, 'userCart']);
     Route::post('/order/products/process', [DetailDineinTransactionController::class, 'createDetailDineinTrasaction']);
-    Route::get('/order/receipt', [DineinTransactionController::class, 'getDineinTransactionUserWithProduct']);
+    Route::post('/order/products/delete', [DetailDineinTransactionController::class, 'deleteProductCart']);
+    Route::get('/order/submit', [CartController::class, 'submitCart']);
 });

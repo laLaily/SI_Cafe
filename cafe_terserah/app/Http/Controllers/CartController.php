@@ -10,8 +10,16 @@ class CartController extends Controller
     {
         $products = new ProductController();
 
+        $transactions = new DineinTransactionController();
+
         $carts = new DineinTransactionController();
 
-        return view('order.dinein_order', ['products' => $products->getProducts(), 'carts' => $carts->getProductTransactionUserWithProduct($request)]);
+        return view('order.dinein_order', ['products' => $products->getProducts(), 'transactions' => $transactions->getDineinTransactionUserWithSeatNumber($request->session()->get('session_token')), 'carts' => $carts->getProductTransactionUserWithProduct($request)]);
+    }
+
+    public function submitCart(Request $request)
+    {
+        $request->session()->forget('session_token');
+        return redirect('/home');
     }
 }
