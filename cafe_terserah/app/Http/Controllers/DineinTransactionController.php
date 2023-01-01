@@ -17,7 +17,29 @@ class DineinTransactionController extends Controller
 
         $data = DineinTransaction::where('customer_name', $request->input('customer_name'))->where('seat_id', $request->input('seat_id'))->orderBy('id', 'desc')->first();
 
-        var_dump($data->id);
+        if ($data != NULL) {
+            $request->session()->put('session_token', $data->id);
+            return redirect('/dinein/order/products');
+        } else {
+            return redirect('/dinein/order');
+        }
+    }
+
+    public function createDineinTransactionReservation(Request $request)
+    {
+        $res = new ReservationTransactionController();
+        $dat = $res->getDataReservationUser($request->session()->get('res_token'));
+
+        $dinein = new DineinTransaction();
+        $dinein->customer_name = $dat->customer_name;
+        $dinein->seat_id = $request->input('seat_id');
+        $dinein->transaction_date = $dat->reservation_date;
+        $dinein->save();
+
+        $data = DineinTransaction::where('customer_name', $dat->customer_name)->where('seat_id', $request->input('seat_id'))->orderBy('id', 'desc')->first();
+
+        $update = new ReservationTransactionController();
+        $update->updateReservationTransactionUser($request->session()->get('res_token'), $data->id);
 
         if ($data != NULL) {
             $request->session()->put('session_token', $data->id);

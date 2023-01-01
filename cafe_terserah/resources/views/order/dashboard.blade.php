@@ -73,7 +73,7 @@
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, doloremque. Corrupti perspiciatis, deserunt ab sit dolor fugiat temporibus recusandae, numquam architecto error incidunt asperiores eos repellat mollitia minima. In quos pariatur unde error ratione dolore sequi tenetur deleniti sunt aperiam officia magni repellendus voluptatem, illum asperiores natus deserunt saepe minima.</p>
                 </div>
                 <div class="link">
-                    <a href="./reservation.php">Learn More</a>
+                    <a href="/reservation/order">Learn More</a>
                 </div>
             </div>
             <div class="dine">

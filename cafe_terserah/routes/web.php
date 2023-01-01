@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\DetailDineinTransactionController;
 use App\Http\Controllers\DineinTransactionController;
+use App\Http\Controllers\DineResController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReservationTransactionController;
 use App\Http\Controllers\SeatController;
@@ -55,7 +56,7 @@ Route::prefix('/admin')->group(function () {
 
 Route::prefix('/dinein')->group(function () {
     Route::get('/order', [SeatController::class, 'getSeats']);
-    Route::post('/order/process', [DineinTransactionController::class, 'createDineinTransaction']);
+    Route::post('/order/process', [DineResController::class, 'dineresControl']);
     Route::get('/order/products', [CartController::class, 'userCart']);
     Route::post('/order/products/process', [DetailDineinTransactionController::class, 'createDetailDineinTrasaction']);
     Route::post('/order/products/delete', [DetailDineinTransactionController::class, 'deleteProductCart']);
@@ -70,4 +71,7 @@ Route::prefix('/reservation')->group(function () {
         return view('order.reservation_regis');
     });
     Route::post('/order/process', [ReservationTransactionController::class, 'createReservationTransaction']);
+    Route::get('/feature', function () {
+        return view('order.reservation_response');
+    });
 });

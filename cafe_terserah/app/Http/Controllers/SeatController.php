@@ -12,7 +12,7 @@ class SeatController extends Controller
         $seat = new Seat();
         $seat->seat_number = $request->input('seat_number');
         $seat->seat_type = $request->input('seat_type');
-        $seat->admin_id = $request->cookie('token');
+        $seat->admin_id = $request->session()->get('token');
         $seat->save();
     }
 

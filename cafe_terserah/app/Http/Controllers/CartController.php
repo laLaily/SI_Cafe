@@ -24,6 +24,9 @@ class CartController extends Controller
         $exist = isset($data);
 
         if ($exist) {
+            if ($request->session()->has('res_token')) {
+                $request->session()->forget('res_token');
+            }
             $request->session()->forget('session_token');
             return redirect('/dinein/order/success');
         } else {
