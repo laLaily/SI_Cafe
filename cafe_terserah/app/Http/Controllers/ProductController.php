@@ -14,7 +14,7 @@ class ProductController extends Controller
         $product->product_category = $request->input('product_category');
         $product->product_price = $request->input('product_price');
         $product->product_stock = $request->input('product_stock');
-        $product->updater_id = $request->cookie('token');
+        $product->updater_id = $request->session()->get('token');
         $product->save();
     }
 

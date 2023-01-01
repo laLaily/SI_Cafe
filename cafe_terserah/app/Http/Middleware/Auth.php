@@ -16,7 +16,7 @@ class Auth
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->cookie('token', null) != null) {
+        if ($request->session()->get('token') != NULL) {
             return $next($request);
         } else {
             return response('Error: Unauthorized', 401);

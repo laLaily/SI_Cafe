@@ -19,7 +19,15 @@ class CartController extends Controller
 
     public function submitCart(Request $request)
     {
-        $request->session()->forget('session_token');
-        return redirect('/home');
+        $data = new DineinTransactionController();
+
+        $exist = isset($data);
+
+        if ($exist) {
+            $request->session()->forget('session_token');
+            return redirect('/dinein/order/success');
+        } else {
+            return redirect('/dinein/order/products');
+        }
     }
 }

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
@@ -25,13 +24,13 @@ class AdminController extends Controller
 
     public function getAdmin(Request $request)
     {
-        $admin = Admin::find($request->cookie('token'));
+        $admin = Admin::find($request->session()->get('token'));
         return view('admin.dashboard_admin', ['admin' => $admin]);
     }
 
     public function updatePasswordAdmin(Request $request)
     {
-        $admin = Admin::find($request->session()->has('token'));
+        $admin = Admin::find($request->session()->get('token'));
         $admin->password = $request->input('password');
         $admin->save();
     }
@@ -47,10 +46,10 @@ class AdminController extends Controller
         $admin = Admin::where('username', $request->input("username"))->first();
 
         if (Hash::check($request->input('password'), $admin->password)) {
-            $request->session()->put('token');
-            return redirect('/admin/dashboard');
+            $request->session()->put('token', $admin->id);
+            // return redirect('/admin/dashboard');
         } else {
-            return redirect('/admin/login');
+            // return redirect('/admin/login');
         }
     }
 

@@ -5,10 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <!-- <link rel="stylesheet" href="{{ URL::asset('css/templateHeader.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('css/templateFooter.css') }}"> -->
-    @import "templateHeader.css"
+    <link rel="stylesheet" href="{{ mix('css/templateHeader.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/style.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/templateFooter.css') }}">
 </head>
 
 <body>
