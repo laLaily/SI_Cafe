@@ -17,7 +17,11 @@
             </div>
             <div class="mb-3">
                 <label for="customer_name" class="form-label">Name</label>
+                @if(@isset($reservations))
+                <input type="text" readonly disabled class="form-control" class="form-control" id="customer_name" name="customer_name" placeholder="name" value="{{ $reservations->customer_name }}">
+                @else
                 <input type="text" class="form-control" id="customer_name" name="customer_name" placeholder="name">
+                @endif
             </div>
             <div class="mb-4">
                 <label for="seat_id" class="form-label">Seat Number</label>

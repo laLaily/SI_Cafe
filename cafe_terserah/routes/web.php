@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\CartController;
 use App\Http\Controllers\DetailDineinTransactionController;
 use App\Http\Controllers\DineinTransactionController;
 use App\Http\Controllers\DineResController;
@@ -22,10 +21,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('order.dashboard');
-});
-
-Route::get('/home', function () {
     return view('order.dashboard');
 });
 
@@ -57,10 +52,10 @@ Route::prefix('/admin')->group(function () {
 Route::prefix('/dinein')->group(function () {
     Route::get('/order', [SeatController::class, 'getSeats']);
     Route::post('/order/process', [DineResController::class, 'dineresControl']);
-    Route::get('/order/products', [CartController::class, 'userCart']);
+    Route::get('/order/products', [DineinTransactionController::class, 'userCart']);
     Route::post('/order/products/process', [DetailDineinTransactionController::class, 'createDetailDineinTrasaction']);
     Route::post('/order/products/delete', [DetailDineinTransactionController::class, 'deleteProductCart']);
-    Route::get('/order/submit', [CartController::class, 'submitCart']);
+    Route::get('/order/submit', [DineinTransactionController::class, 'submitCart']);
     Route::get('/order/success', function () {
         return view('order.dinein_response');
     });
@@ -74,4 +69,5 @@ Route::prefix('/reservation')->group(function () {
     Route::get('/feature', function () {
         return view('order.reservation_response');
     });
+    Route::get('/confirm', [ReservationTransactionController::class, 'submitReservation']);
 });

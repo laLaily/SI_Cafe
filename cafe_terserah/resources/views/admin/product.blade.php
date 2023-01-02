@@ -9,9 +9,7 @@
 </head>
 
 <body>
-    <h1>Reservation Success</h1>
-    <a href="/reservation/confirm">confirm reservation</a>
-    <a href="/dinein/order">add dine-in for reservation</a>
+
 </body>
 
 </html>

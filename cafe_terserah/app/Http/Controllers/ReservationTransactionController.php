@@ -38,4 +38,15 @@ class ReservationTransactionController extends Controller
         $res->dinein_transaction_id = $idDinein;
         $res->save();
     }
+
+    public function submitReservation(Request $request)
+    {
+        $res = $request->session()->get('res_token');
+
+        if (isset($res)) {
+            $request->session()->forget('res_token');
+        }
+
+        return redirect('/');
+    }
 }

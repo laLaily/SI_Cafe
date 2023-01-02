@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ReservationTransaction;
 use App\Models\Seat;
 use Illuminate\Http\Request;
 
@@ -16,9 +17,16 @@ class SeatController extends Controller
         $seat->save();
     }
 
-    public function getSeats()
+    public function getSeats(Request $request)
     {
         $seats = Seat::all();
-        return view('order.dinein_regis', ['seats' => $seats]);
+
+        $res = $request->session()->get('res_token');
+        if ($res) {
+            $reservtion = ReservationTransaction::find($res);
+            return view('order.dinein_regis', ['seats' => $seats, 'reservations' => $reservtion]);
+        } else {
+            return view('order.dinein_regis', ['seats' => $seats]);
+        }
     }
 }

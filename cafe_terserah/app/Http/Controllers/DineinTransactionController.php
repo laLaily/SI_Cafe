@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DineinTransaction;
 use App\Models\Product;
+use App\Models\ReservationTransaction;
 use Illuminate\Http\Request;
 
 class DineinTransactionController extends Controller
@@ -27,8 +28,7 @@ class DineinTransactionController extends Controller
 
     public function createDineinTransactionReservation(Request $request)
     {
-        $res = new ReservationTransactionController();
-        $dat = $res->getDataReservationUser($request->session()->get('res_token'));
+        $dat = ReservationTransaction::find($request->session()->get('res_token'));
 
         $dinein = new DineinTransaction();
         $dinein->customer_name = $dat->customer_name;
@@ -38,8 +38,9 @@ class DineinTransactionController extends Controller
 
         $data = DineinTransaction::where('customer_name', $dat->customer_name)->where('seat_id', $request->input('seat_id'))->orderBy('id', 'desc')->first();
 
-        $update = new ReservationTransactionController();
-        $update->updateReservationTransactionUser($request->session()->get('res_token'), $data->id);
+        $update = ReservationTransaction::find($request->session()->get('res_token'));
+        $update->dinein_transaction_id = $data->id;
+        $update->save();
 
         if ($data != NULL) {
             $request->session()->put('session_token', $data->id);
@@ -49,12 +50,23 @@ class DineinTransactionController extends Controller
         }
     }
 
-    public function getProductTransactionUserWithProduct(Request $request)
+    public function getProductTransactionUserWithProduct($id)
     {
         $dinein = DineinTransaction::join('detail_dinein_transactions', 'dinein_transactions.id', '=', 'detail_dinein_transactions.dinein_id')
             ->join('products', 'products.id', '=', 'detail_dinein_transactions.product_id')
             ->select('detail_dinein_transactions.product_id', 'products.product_name', 'detail_dinein_transactions.quantity', 'detail_dinein_transactions.quantity_price')
-            ->where('dinein_transactions.id', $request->session()->get('session_token'))
+            ->where('dinein_transactions.id', $id)
+            ->get();
+
+        return $dinein;
+    }
+
+    public function getProductTransactionUserWithProductTest(Request $request)
+    {
+        $dinein = DineinTransaction::join('detail_dinein_transactions', 'dinein_transactions.id', '=', 'detail_dinein_transactions.dinein_id')
+            ->join('products', 'products.id', '=', 'detail_dinein_transactions.product_id')
+            ->select('detail_dinein_transactions.product_id', 'products.product_name', 'detail_dinein_transactions.quantity', 'detail_dinein_transactions.quantity_price')
+            ->where('dinein_transactions.id', $request->input('dinein_transaction_id'))
             ->get();
 
         return $dinein;
@@ -76,17 +88,29 @@ class DineinTransactionController extends Controller
         return $dinein;
     }
 
-    public function updatePrice($price, $id)
+    public function userCart(Request $request)
     {
-        $dinein = DineinTransaction::find($id);
-        $dinein->total_price += $price;
-        $dinein->save();
+        $products = Product::all();
+
+        $transactions = $this->getDineinTransactionUserWithSeatNumber($request->session()->get('session_token'));
+
+        $carts = $this->getProductTransactionUserWithProduct($request->session()->get('session_token'));
+
+        return view('order.dinein_order', ['products' => $products, 'transactions' => $transactions, 'carts' => $carts]);
     }
 
-    public function substractPrice($price, $id)
+    public function submitCart(Request $request)
     {
-        $dinein = DineinTransaction::find($id);
-        $dinein->total_price -= $price;
-        $dinein->save();
+        $data = $this->getProductTransactionUserWithProduct($request->session()->get('session_token'));
+
+        if (sizeof($data) != 0) {
+            if ($request->session()->has('res_token')) {
+                $request->session()->forget('res_token');
+            }
+            $request->session()->forget('session_token');
+            return redirect('/dinein/order/success');
+        } else {
+            return redirect('/dinein/order/products');
+        }
     }
 }

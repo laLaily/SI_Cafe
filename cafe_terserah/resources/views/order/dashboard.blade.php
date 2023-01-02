@@ -13,7 +13,7 @@
 <body>
     <header>
         <div class="logo">
-            <a href="/home"><img src="" alt="logo-cafe"></a>
+            <a href="/"><img src="" alt="logo-cafe"></a>
         </div>
         <div class="judul">
             <h1>CAFE TERSERAH</h1>

@@ -10,7 +10,7 @@
 
 <body>
     <h1>Transaction Success</h1>
-    <a href="/home">back to home</a>
+    <a href="/">back to home</a>
 </body>
 
 </html>

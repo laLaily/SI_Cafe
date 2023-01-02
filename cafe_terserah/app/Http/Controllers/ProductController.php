@@ -29,9 +29,4 @@ class ProductController extends Controller
         $product = Product::find($id);
         return $product;
     }
-
-    public function updateProduct(Request $request)
-    {
-        $product = new Product();
-    }
 }
