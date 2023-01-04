@@ -18,7 +18,11 @@ return new class extends Migration
             $table->string("customer_name");
             $table->timestamp("reservation_date");
             $table->integer("total_person");
-            $table->foreignId("dinein_transaction_id")->constrained("dinein_transactions")->nullable();
+            $table->unsignedBigInteger("dinein_id")->nullable();
+            $table->foreign("dinein_id")->references("id")->on("dinein_transactions");
+            $table->enum("status", ["reserved", "in progress", "done"])->default("reserved");
+            $table->unsignedBigInteger("updater_id")->nullable();
+            $table->foreign("updater_id")->references("id")->on("admins");
         });
     }
 

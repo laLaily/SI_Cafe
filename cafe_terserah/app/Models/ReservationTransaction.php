@@ -23,6 +23,11 @@ class ReservationTransaction extends Model
         return $this->belongsTo(DineInTransaction::class);
     }
 
+    public function admin()
+    {
+        return $this->belongsTo(Admin::class);
+    }
+
     public function customerName(): Attribute
     {
         return new Attribute(

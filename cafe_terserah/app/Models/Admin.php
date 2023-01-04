@@ -17,7 +17,7 @@ class Admin extends Model
     ];
 
     protected $hidden = [
-        "passowrd",
+        "password",
     ];
 
     public $timestamps = false;
@@ -30,6 +30,16 @@ class Admin extends Model
     public function product()
     {
         return $this->hasMany(Product::class);
+    }
+
+    public function dinein()
+    {
+        return $this->hasMany(DineinTransaction::class);
+    }
+
+    public function reservation()
+    {
+        return $this->hasMany(ReservationTransaction::class);
     }
 
     public function password(): Attribute

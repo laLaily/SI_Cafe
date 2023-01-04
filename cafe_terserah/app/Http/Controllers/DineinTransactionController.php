@@ -96,7 +96,11 @@ class DineinTransactionController extends Controller
 
         $carts = $this->getProductTransactionUserWithProduct($request->session()->get('session_token'));
 
-        return view('order.dinein_order', ['products' => $products, 'transactions' => $transactions, 'carts' => $carts]);
+        $filterMakanan = Product::where('product_category', 'makanan')->get();
+        $filterMinuman = Product::where('product_category', 'minuman')->get();
+        $filterDesert = Product::where('product_category', 'desert')->get();
+
+        return view('order.dinein_order', ['products' => $products, 'transactions' => $transactions, 'carts' => $carts, 'filterMakanan' => $filterMakanan, 'filterMinuman' => $filterMinuman, 'filterDesert' => $filterDesert]);
     }
 
     public function submitCart(Request $request)
