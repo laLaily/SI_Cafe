@@ -28,9 +28,12 @@ Route::prefix('/admin')->group(function () {
     Route::get('/get', [AdminController::class, 'getAdmins']);
 
     Route::post('/create', [AdminController::class, 'insertAdmin']);
-    Route::post('/login', [AdminController::class, 'loginAdmin']);
+    Route::get('/login', function(){
+        return view('admin.login_admin');
+    });
+    Route::post('/login/process', [AdminController::class, 'loginAdmin']);
     Route::delete('/delete/{id}', [AdminController::class, 'deleteAdmin']);
-
+    
     Route::middleware(['myauth'])->group(function () {
         Route::get('/logout', [AdminController::class, 'logoutAdmin']);
         Route::get('/dashboard', [AdminController::class, 'getAdmin']);
@@ -38,13 +41,26 @@ Route::prefix('/admin')->group(function () {
 
         Route::prefix('/product')->group(function () {
             Route::post('/create', [ProductController::class, 'insertProduct']);
-            Route::get('/get', [ProductController::class, 'getProducts']);
-            Route::get('/get/{id}', [ProductController::class, 'getOneProduct']);
+            Route::get('/view', [ProductController::class, 'getProducts']);
+            Route::get('/view/{id}', [ProductController::class, 'getOneProduct']);
+            Route::delete('/delete/{id}', [ProductController::class, 'deleteProduct']);
+            Route::post('/update/process/{id}', [ProductController::class, 'updateProduct']);
         });
 
         Route::prefix('/seat')->group(function () {
             Route::post('/create', [SeatController::class, 'createSeat']);
-            Route::get('/get', [SeatController::class, 'getSeats']);
+            Route::get('/view', [SeatController::class, 'getSeats']);
+            Route::get('/viewSeat', [SeatController::class, 'getSeatList']);
+            Route::get('/view/{id}', [SeatController::class, 'getOneSeat']);
+            Route::delete('/delete/{id}', [SeatController::class, 'deleteSeat']);
+            Route::post('/update/process/{id}', [SeatController::class, 'updateSeat']);
+        });
+
+        Route::prefix('/admin')->group(function(){
+            Route::post('/create', [AdminController::class, 'insertAdmin']);
+            Route::get('/view', [AdminController::class, 'getAdmins']);
+            Route::post('/update/process/{id}', [AdminController::class, 'updatePasswordAdmin']);
+            Route::delete('/delete/{id}', [AdminController::class, 'deleteAdmin']);
         });
     });
 });
