@@ -19,7 +19,7 @@ class AdminController extends Controller
     public function getAdmins()
     {
         $admin = Admin::all();
-        return $admin;
+        return view('admin.admin_admin', ['admins'=>$admin]);;
     }
 
     public function getAdmin(Request $request)
@@ -39,6 +39,7 @@ class AdminController extends Controller
     {
         $admin = Admin::find($id);
         $admin->delete();
+        return redirect('/admin/admin/view');
     }
 
     public function loginAdmin(Request $request)
@@ -47,9 +48,9 @@ class AdminController extends Controller
 
         if (Hash::check($request->input('password'), $admin->password)) {
             $request->session()->put('token', $admin->id);
-            // return redirect('/admin/dashboard');
+            return redirect('/admin/dashboard');
         } else {
-            // return redirect('/admin/login');
+            return redirect('/admin/login');
         }
     }
 

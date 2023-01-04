@@ -21,12 +21,34 @@ class ProductController extends Controller
     public function getProducts()
     {
         $product = Product::all();
-        return $product;
+        return view('admin.products_admin', ['products'=>$product]);
     }
 
     public function getOneProduct($id)
     {
         $product = Product::find($id);
-        return $product;
+        return view('admin.products_admin', ['products'=>$product]);
     }
+
+    public function deleteProduct($id){
+        $product = Product::find($id);
+        $product->delete();
+        return redirect('/admin/product/view');
+    }
+
+    public function update(Request $request){
+        $product = Product::find($request->query('id'));
+        if( $request->input('price') != ""){
+            $product->prduct_price = $request -> input('price');
+        } else if ( $request->input('stock') != ""){
+            $product->prduct_stock = $request -> input('stock');
+        } else {
+            $product->prduct_stock = $request -> input('stock');
+            $product->prduct_price = $request -> input('price');
+        }
+        $product->updater_id=$request->session()->get('token');
+        $product->save();
+    }
+
+    
 }

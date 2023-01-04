@@ -8,8 +8,7 @@ use Illuminate\Http\Request;
 
 class SeatController extends Controller
 {
-    public function createSeat(Request $request)
-    {
+    public function createSeat(Request $request){
         $seat = new Seat();
         $seat->seat_number = $request->input('seat_number');
         $seat->seat_type = $request->input('seat_type');
@@ -17,8 +16,7 @@ class SeatController extends Controller
         $seat->save();
     }
 
-    public function getSeats(Request $request)
-    {
+    public function getSeats(Request $request){
         $seats = Seat::all();
 
         $res = $request->session()->get('res_token');
@@ -28,5 +26,29 @@ class SeatController extends Controller
         } else {
             return view('order.dinein_regis', ['seats' => $seats]);
         }
+    }
+
+    public function deleteSeat($id){
+        $seat = Seat::find($id);
+        $seat->delete();
+        return redirect('/admin/seat/view');
+    }
+
+    public function updateSeat(Request $request){
+        $seat = Seat::find($request->query('id'));
+        $seat->seat_type = $request->input('seatType');
+        $seat->updater_id = $request->session()->get('token');
+        $seat->save();
+    }
+
+    public function getOneSeat($id)
+    {
+        $seat = Seat::find($id);
+        return view('admin.seat_admin', ['seats'=>$seat]);;
+    }
+
+    public function getSeatList(){
+        $seat = Seat::all();
+        return view('admin.seat_admin', ['seats'=>$seat]);
     }
 }
