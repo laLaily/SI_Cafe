@@ -21,6 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger("dinein_id")->nullable();
             $table->foreign("dinein_id")->references("id")->on("dinein_transactions");
             $table->enum("status", ["reserved", "in progress", "done"])->default("reserved");
+            $table->timestamp("updated_at")->nullable();
             $table->unsignedBigInteger("updater_id")->nullable();
             $table->foreign("updater_id")->references("id")->on("admins");
         });

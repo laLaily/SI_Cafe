@@ -39,7 +39,7 @@ class DineinTransactionController extends Controller
         $data = DineinTransaction::where('customer_name', $dat->customer_name)->where('seat_id', $request->input('seat_id'))->orderBy('id', 'desc')->first();
 
         $update = ReservationTransaction::find($request->session()->get('res_token'));
-        $update->dinein_transaction_id = $data->id;
+        $update->dinein_id = $data->id;
         $update->save();
 
         if ($data != NULL) {
