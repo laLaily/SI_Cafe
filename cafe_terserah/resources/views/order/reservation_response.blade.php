@@ -23,10 +23,10 @@
             <a href="">Galeri</a>
         </div>
     </header>
-    <div class="align-items-center bg-light p-5 mx-auto rounded-4 position-absolute top-50 start-50 translate-middle" style="width: 550px;">
+    <div class="align-items-center bg-light p-5 mx-auto rounded-4 position-absolute top-50 start-50 translate-middle" style="width: 650px;">
         <h1>Reservation Success</h1>
-         <button class=" btn " style="width: 100px; background: #483434; " type="submit"><a style= color:#EED6C4 href="/reservation/confirm">confirm reservation</a></button>
-         <button class=" btn " style="width: 100px; background: #483434; " type="submit"><a style= color:#EED6C4 href="/dinein/order">add dine-in for reservation</a></button>
+         <button class=" btn " style="width: 175px; background: #483434; " type="submit"><a style= color:#EED6C4 href="/reservation/confirm">confirm reservation</a></button>
+         <button class=" btn " style="width: 175px; background: #483434; " type="submit"><a style= color:#EED6C4 href="/dinein/order">add dine-in</a></button>
     </div>
         </div>
 </body>
