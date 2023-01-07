@@ -36,18 +36,16 @@ class ProductController extends Controller
         return redirect('/admin/product/view');
     }
 
-    public function update(Request $request){
-        $product = Product::find($request->query('id'));
-        if( $request->input('price') != ""){
-            $product->prduct_price = $request -> input('price');
-        } else if ( $request->input('stock') != ""){
-            $product->prduct_stock = $request -> input('stock');
-        } else {
-            $product->prduct_stock = $request -> input('stock');
-            $product->prduct_price = $request -> input('price');
-        }
+    public function update(Request $request, $id){
+        $product = Product::find($id);
+
+        $product->product_price = $request->input('price');
+        $product->product_stock = $request->input('stock');
+        
         $product->updater_id=$request->session()->get('token');
         $product->save();
+
+        return redirect('/admin/product/view');
     }
 
     

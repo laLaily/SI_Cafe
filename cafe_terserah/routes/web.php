@@ -43,8 +43,8 @@ Route::prefix('/admin')->group(function () {
             Route::post('/create', [ProductController::class, 'insertProduct']);
             Route::get('/view', [ProductController::class, 'getProducts']);
             Route::get('/view/{id}', [ProductController::class, 'getOneProduct']);
-            Route::delete('/delete/{id}', [ProductController::class, 'deleteProduct']);
-            Route::post('/update/process/{id}', [ProductController::class, 'updateProduct']);
+            Route::post('/delete/{id}', [ProductController::class, 'deleteProduct']);
+            Route::post('/update/process/{id}', [ProductController::class, 'update']);
         });
 
         Route::prefix('/seat')->group(function () {
@@ -52,7 +52,7 @@ Route::prefix('/admin')->group(function () {
             Route::get('/view', [SeatController::class, 'getSeats']);
             Route::get('/viewSeat', [SeatController::class, 'getSeatList']);
             Route::get('/view/{id}', [SeatController::class, 'getOneSeat']);
-            Route::delete('/delete/{id}', [SeatController::class, 'deleteSeat']);
+            Route::post('/delete/{id}', [SeatController::class, 'deleteSeat']);
             Route::post('/update/process/{id}', [SeatController::class, 'updateSeat']);
         });
 

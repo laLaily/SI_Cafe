@@ -31,7 +31,7 @@ class SeatController extends Controller
     public function deleteSeat($id){
         $seat = Seat::find($id);
         $seat->delete();
-        return redirect('/admin/seat/view');
+        return redirect('/admin/seat/viewSeat');
     }
 
     public function updateSeat(Request $request){

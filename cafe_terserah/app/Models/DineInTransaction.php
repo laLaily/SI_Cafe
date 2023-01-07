@@ -13,6 +13,7 @@ class DineinTransaction extends Model
     protected $fillable = [
         "customer_name",
         "seat_id",
+        "total_price"
     ];
 
     public $timestamps = false;
