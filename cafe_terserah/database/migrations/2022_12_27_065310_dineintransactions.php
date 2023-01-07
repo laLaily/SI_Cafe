@@ -19,6 +19,10 @@ return new class extends Migration
             $table->timestamp("transaction_date");
             $table->foreignId("seat_id")->constrained("seats");
             $table->integer("total_price")->default(0);
+            $table->enum("status", ['in progress', 'success'])->default('in progress');
+            $table->timestamp("updated_at")->nullable();
+            $table->unsignedBigInteger("updater_id")->nullable();
+            $table->foreign("updater_id")->references("id")->on("admins");
         });
     }
 

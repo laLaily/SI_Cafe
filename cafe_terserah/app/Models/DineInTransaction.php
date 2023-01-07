@@ -23,6 +23,11 @@ class DineinTransaction extends Model
         return $this->hasMany(DetailDineInTransaction::class);
     }
 
+    public function admin()
+    {
+        return $this->belongsTo(Admin::class);
+    }
+
     public function customerName(): Attribute
     {
         return new Attribute(

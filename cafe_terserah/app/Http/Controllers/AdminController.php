@@ -19,7 +19,7 @@ class AdminController extends Controller
     public function getAdmins()
     {
         $admin = Admin::all();
-        return view('admin.admin_admin', ['admins'=>$admin]);;
+        return view('admin.admin_admin', ['admins' => $admin]);;
     }
 
     public function getAdmin(Request $request)

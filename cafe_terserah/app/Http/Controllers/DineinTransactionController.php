@@ -39,7 +39,7 @@ class DineinTransactionController extends Controller
         $data = DineinTransaction::where('customer_name', $dat->customer_name)->where('seat_id', $request->input('seat_id'))->orderBy('id', 'desc')->first();
 
         $update = ReservationTransaction::find($request->session()->get('res_token'));
-        $update->dinein_transaction_id = $data->id;
+        $update->dinein_id = $data->id;
         $update->save();
 
         if ($data != NULL) {
@@ -96,7 +96,11 @@ class DineinTransactionController extends Controller
 
         $carts = $this->getProductTransactionUserWithProduct($request->session()->get('session_token'));
 
-        return view('order.dinein_order', ['products' => $products, 'transactions' => $transactions, 'carts' => $carts]);
+        $filterMakanan = Product::where('product_category', 'makanan')->get();
+        $filterMinuman = Product::where('product_category', 'minuman')->get();
+        $filterDesert = Product::where('product_category', 'desert')->get();
+
+        return view('order.dinein_order', ['products' => $products, 'transactions' => $transactions, 'carts' => $carts, 'filterMakanan' => $filterMakanan, 'filterMinuman' => $filterMinuman, 'filterDesert' => $filterDesert]);
     }
 
     public function submitCart(Request $request)
