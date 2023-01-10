@@ -28,12 +28,12 @@ Route::prefix('/admin')->group(function () {
     Route::get('/get', [AdminController::class, 'getAdmins']);
 
     Route::post('/create', [AdminController::class, 'insertAdmin']);
-    Route::get('/login', function(){
+    Route::get('/login', function () {
         return view('admin.login_admin');
     });
     Route::post('/login/process', [AdminController::class, 'loginAdmin']);
     Route::delete('/delete/{id}', [AdminController::class, 'deleteAdmin']);
-    
+
     Route::middleware(['myauth'])->group(function () {
         Route::get('/logout', [AdminController::class, 'logoutAdmin']);
         Route::get('/dashboard', [AdminController::class, 'getAdmin']);
@@ -56,7 +56,7 @@ Route::prefix('/admin')->group(function () {
             Route::post('/update/process/{id}', [SeatController::class, 'updateSeat']);
         });
 
-        Route::prefix('/admin')->group(function(){
+        Route::prefix('/admin')->group(function () {
             Route::post('/create', [AdminController::class, 'insertAdmin']);
             Route::get('/view', [AdminController::class, 'getAdmins']);
             Route::post('/update/process/{id}', [AdminController::class, 'updatePasswordAdmin']);
