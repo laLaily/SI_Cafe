@@ -26,6 +26,11 @@ class DineinTransactionController extends Controller
         }
     }
 
+    public function getDineintransaction(){
+        $dinein = DineinTransaction::all();
+        return view('admin.transaction_admin', ['dineinTransactions'=>$dinein]);
+    }
+
     public function createDineinTransactionReservation(Request $request)
     {
         $dat = ReservationTransaction::find($request->session()->get('res_token'));

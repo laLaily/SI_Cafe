@@ -16,6 +16,7 @@ class ProductController extends Controller
         $product->product_stock = $request->input('product_stock');
         $product->updater_id = $request->session()->get('token');
         $product->save();
+        return redirect('/admin/product/view');
     }
 
     public function getProducts()
