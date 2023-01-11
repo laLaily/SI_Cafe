@@ -59,10 +59,11 @@
         <div class="d-flex justify-content-between align-items-center mx-5 my-2">
             <div>
                 <p>Filter</p>
+
                 <button id="btnall" onclick="filterAll()">All</button>
-                <button id="btnfiltermakanan" onclick="filterMakanan()">Makanan</button>
-                <button id="btnfilterminuman" onclick="filterMinuman()">Minuman</button>
-                <button id="btnfilterdesert" onclick="filterDesert()">Desert</button>
+                <button id="btnfiltermakanan" onclick="filterMakanan()">Food</button>
+                <button id="btnfilterminuman" onclick="filterMinuman()">Beverage</button>
+                <button id="btnfilterdesert" onclick="filterDesert()">Dessert</button>
             </div>
             <!-- Button trigger modal -->
             <div>
