@@ -49,4 +49,10 @@ class ReservationTransactionController extends Controller
 
         return redirect('/');
     }
+
+    public function getReservationTransactions(){
+        $reservations = ReservationTransaction::all();
+        return view('admin.reservationTransaction_admin', ['reservations'=>$reservations]);
+    }
+
 }

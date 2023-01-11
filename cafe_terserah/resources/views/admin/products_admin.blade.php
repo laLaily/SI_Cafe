@@ -12,51 +12,52 @@
 
 <body>
     <div>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="">
+        <button data-bs-toggle="modal" data-bs-target="#staticBackdrop">
             Add Product
         </button>
-        <div class="modal fade" id="" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <form action="/admin/product/create" method="post">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Insert Product</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="row">
-                                            <label for="staticEmail" class="col-sm-5 col-form-label">Product Name</label>
-                                            <div class="col-sm-5">
-                                                <input type="text"  name="product_name" id="product_name">
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <label for="staticEmail" class="col-sm-5 col-form-label">Product Category</label>
-                                            <div class="col-sm-5">
-                                                <input type="text" value="makanan" name="product_category" id="product_category">
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <label for="staticEmail" class="col-sm-5 col-form-label">Product Price</label>
-                                            <div class="col-sm-5">
-                                                <input type="number"  name="product_price" id="product_price">
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <label for="staticEmail" class="col-sm-5 col-form-label">Product Stock</label>
-                                            <div class="col-sm-5">
-                                                <input type="number"  min="1" max="100" name="product_stock" id="product_stock">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary">Add Product</button>
-                                    </div>
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <form action="/admin/product/create" method="post">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Product</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <label for="staticEmail" class="col-sm-5 col-form-label">Product Name</label>
+                                <div class="col-sm-5">
+                                    <input type="text"  id="product_name" name="product_name">
                                 </div>
                             </div>
-                        </form>
+                            <div class="row">
+                                <label for="staticEmail" class="col-sm-5 col-form-label">Category</label>
+                                <div class="col-sm-5">
+                                    <input type="text"  id="product_category" name="product_category">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="staticEmail" class="col-sm-5 col-form-label">Price</label>
+                                <div class="col-sm-5">
+                                    <input type="text"  id="product_price" name="product_price">
+                                </div>
+                            </div>
+            
+                            <div class="row">
+                                <label for="staticEmail" class="col-sm-5 col-form-label">Stock</label>
+                                <div class="col-sm-5">
+                                    <input type="number" value="1" min="1" max="100" name="product_stock" id="product_stock" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Add Product</button>
+                        </div>
                     </div>
+                </div>
+            </form>
+        </div>
     </div>
     <div style="list-style: none;">
         <table class="table table-hover">

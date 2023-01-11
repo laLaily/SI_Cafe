@@ -62,6 +62,14 @@ Route::prefix('/admin')->group(function () {
             Route::post('/update/process/{id}', [AdminController::class, 'updatePasswordAdmin']);
             Route::delete('/delete/{id}', [AdminController::class, 'deleteAdmin']);
         });
+
+        Route::prefix('/dineintrx')->group(function(){
+            Route::get('/view', [DineinTransactionController::class, 'getDineintransaction']);
+        });
+
+        Route::prefix('/reservationtrx')->group(function(){
+            Route::get('/view', [ReservationTransactionController::class, 'getReservationTransactions']);
+        });
     });
 });
 

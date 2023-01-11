@@ -14,6 +14,7 @@ class SeatController extends Controller
         $seat->seat_type = $request->input('seat_type');
         $seat->admin_id = $request->session()->get('token');
         $seat->save();
+        return redirect('/admin/seat/viewSeat');
     }
 
     public function getSeats(Request $request){
