@@ -22,7 +22,7 @@ return new class extends Migration
             $table->primary(["dinein_id", "product_id"]);
 
             $table->foreign("dinein_id")->references("id")->on("dinein_transactions");
-            $table->foreign("product_id")->references("id")->on("products");
+            $table->foreign("product_id")->references("id")->on("products")->nullOnDelete();
         });
     }
 

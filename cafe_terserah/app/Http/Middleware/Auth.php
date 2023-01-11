@@ -19,7 +19,7 @@ class Auth
         if ($request->session()->get('token') != NULL) {
             return $next($request);
         } else {
-            return response('Error: Unauthorized', 401);
+            return view('/admin/login');
         }
     }
 }
