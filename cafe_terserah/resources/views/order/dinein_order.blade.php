@@ -59,7 +59,6 @@
         <div class="d-flex justify-content-between align-items-center mx-5 my-2">
             <div>
                 <p>Filter</p>
-
                 <button id="btnall" onclick="filterAll()">All</button>
                 <button id="btnfiltermakanan" onclick="filterMakanan()">Food</button>
                 <button id="btnfilterminuman" onclick="filterMinuman()">Beverage</button>
@@ -68,7 +67,8 @@
             <!-- Button trigger modal -->
             <div>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                    Cart
+                    <p>Cart</p>
+                    <p>{{ }}/{{ $transactions->totalPrice }}</p>
                 </button>
             </div>
         </div>
