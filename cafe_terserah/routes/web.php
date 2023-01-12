@@ -24,6 +24,8 @@ Route::get('/', function () {
     return view('order.dashboard');
 });
 
+
+
 Route::prefix('/admin')->group(function () {
     Route::get('/get', [AdminController::class, 'getAdmins']);
 
@@ -63,11 +65,11 @@ Route::prefix('/admin')->group(function () {
             Route::delete('/delete/{id}', [AdminController::class, 'deleteAdmin']);
         });
 
-        Route::prefix('/dineintrx')->group(function(){
+        Route::prefix('/dineintrx')->group(function () {
             Route::get('/view', [DineinTransactionController::class, 'getDineintransaction']);
         });
 
-        Route::prefix('/reservationtrx')->group(function(){
+        Route::prefix('/reservationtrx')->group(function () {
             Route::get('/view', [ReservationTransactionController::class, 'getReservationTransactions']);
         });
     });
