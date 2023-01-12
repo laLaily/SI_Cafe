@@ -25,8 +25,6 @@ Route::get('/', function () {
 });
 
 Route::prefix('/admin')->group(function () {
-    Route::get('/get', [AdminController::class, 'getAdmins']);
-
     Route::post('/create', [AdminController::class, 'insertAdmin']);
     Route::get('/login', function () {
         return view('admin.login_admin');
@@ -35,6 +33,10 @@ Route::prefix('/admin')->group(function () {
     Route::delete('/delete/{id}', [AdminController::class, 'deleteAdmin']);
 
     Route::middleware(['myauth'])->group(function () {
+        Route::post('/create', [AdminController::class, 'insertAdmin']);
+        Route::get('/view/{id}', [AdminController::class, 'getAdmin']);
+        Route::post('/update/process/{id}', [AdminController::class, 'updatePasswordAdmin']);
+        
         Route::get('/logout', [AdminController::class, 'logoutAdmin']);
         Route::get('/dashboard', [AdminController::class, 'getAdmin']);
         Route::put('/change/password/{id}', [AdminController::class, 'updatePasswordAdmin']);
@@ -49,18 +51,10 @@ Route::prefix('/admin')->group(function () {
 
         Route::prefix('/seat')->group(function () {
             Route::post('/create', [SeatController::class, 'createSeat']);
-            Route::get('/view', [SeatController::class, 'getSeats']);
-            Route::get('/viewSeat', [SeatController::class, 'getSeatList']);
+            Route::get('/view', [SeatController::class, 'getSeatList']);
             Route::get('/view/{id}', [SeatController::class, 'getOneSeat']);
             Route::post('/delete/{id}', [SeatController::class, 'deleteSeat']);
             Route::post('/update/process/{id}', [SeatController::class, 'updateSeat']);
-        });
-
-        Route::prefix('/admin')->group(function () {
-            Route::post('/create', [AdminController::class, 'insertAdmin']);
-            Route::get('/view', [AdminController::class, 'getAdmins']);
-            Route::post('/update/process/{id}', [AdminController::class, 'updatePasswordAdmin']);
-            Route::get('/delete/{id}', [AdminController::class, 'deleteAdmin']);
         });
 
         Route::prefix('/dineintrx')->group(function(){

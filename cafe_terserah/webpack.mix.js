@@ -19,3 +19,4 @@ mix.js('resources/js/app.js', 'public/js')
 mix.postCss('resources/css/templateHeader.css','public/css',[]);
 mix.postCss('resources/css/style.css','public/css',[]);
 mix.postCss('resources/css/templateFooter.css','public/css',[]);
+mix.postCss('resources/css/styledashboard.css','public/css',[]);

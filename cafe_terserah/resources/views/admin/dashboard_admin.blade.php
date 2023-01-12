@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard-admin</title>
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-    <link rel="stylesheet" href="styledashboard.css">
+    <link rel="stylesheet" href="{{ mix('css/styledashboard.css') }}">
 </head>
 <body>
     <div class="sidebar">
@@ -16,32 +16,32 @@
         <div class="sidebar-menu">
             <ul>
                 <li>
-                    <a href="" class="active"><span class="las la-igloo"></span>
+                    <a href="/admin/dashboard" class="active"><span class="las la-igloo"></span>
                         <span>Dashboard</span></a>
                 </li>
                 <li>
-                    <a href=""><span class="las la-users"></span>
+                    <a href="/admin/view/{{ $admin->id }}"><span class="las la-users"></span>
                         <span>Data Admin</span></a>
                 </li>
                 <li>
-                    <a href=""><span class="las la-shopping-cart"></span>
+                    <a href="/admin/dineintrx/view"><span class="las la-shopping-cart"></span>
                         <span>Data Transaksi</span></a>
                 </li>
                 <li>
-                    <a href=""><span class="las la-plus"></span>
+                    <a href="/admin/reservationtrx/view"><span class="las la-plus"></span>
                         <span>Data Reservasi</span></a>
                 </li>
                 <li>
-                    <a href=""><span class="las la-shopping-bag"></span>
-                        <span>Data Detail Transaksi</span></a>
-                </li>
-                <li>
-                    <a href=""><span class="las la-hamburger"></span>
+                    <a href="/admin/product/view"><span class="las la-hamburger"></span>
                         <span>Data Produk</span></a>
                 </li>
                 <li>
-                    <a href=""><span class="las la-chair"></span>
+                    <a href="/admin/seat/view"><span class="las la-chair"></span>
                         <span>Data Seat</span></a>
+                </li>
+                <li>
+                    <a href="/admin/logout"><span class="las la-shopping-bag"></span>
+                        <span>Logout</span></a>
                 </li>
             </ul>
         </div>
@@ -68,44 +68,40 @@
         </header>
         <main>
             <div class="cards">
-                <div class="cards-single">
-                    <div>
-                        <h1>3</h1>
-                            <span>Admin</span>
-                    </div>    
-                    <div>
-                        <span class="las la-users"></span>
-                    </div>    
-                </div>
-                <div class="cards-single">
-                    <div>
-                        <h1>135</h1>
-                            <span>Transaksi</span>
+                <a href="/admin/view/{{ $admin->id }}">
+                    <div class="cards-single">
+                        <div>
+                            <h1>3</h1>
+                                <span>Admin</span>
+                        </div>    
+                        <div>
+                            <span class="las la-users"></span>
+                        </div>    
                     </div>
-                    <div>
-                        <span class="las la-shopping-cart"></span>
+                </a>
+                <a href="/admin/dineintrx/view">
+                    <div class="cards-single">
+                        <div>
+                            <h1>135</h1>
+                                <span>Transaksi</span>
+                        </div>
+                        <div>
+                            <span class="las la-shopping-cart"></span>
+                        </div>
                     </div>
-                </div>
-                <div class="cards-single">
-                    <div>
-                        <h1>70</h1>
-                            <span>Reservasi</span>
+                </a>
+                <a href="/admin/reservationtrx/view">
+                    <div class="cards-single">
+                        <div>
+                            <h1>70</h1>
+                                <span>Reservasi</span>
+                        </div>
+                        <div>
+                            <span class="las la-plus"></span>
+                        </div>
                     </div>
-                    <div>
-                        <span class="las la-plus"></span>
-                    </div>
-                </div>
-                
-                <div class="cards-single">
-                    <div>
-                        <h1>135</h1>
-                            <span>Detail Trx</span>
-                    </div>
-                    <div>
-                        <span class="las la-shopping-bag"></span>
-                    </div>
-                </div>
-                <a href="">
+                </a>
+                <a href="/admin/product/view">
                     <div class="cards-single">
                         <div>
                             <h1>20</h1>
@@ -116,18 +112,28 @@
                         </div>
                     </div>
                 </a>
-                
-                
-                <div class="cards-single">
-                    <div>
-                        <h1>140</h1>
-                            <span>Seat</span>
+                <a href="/admin/seat/view">
+                    <div class="cards-single">
+                        <div>
+                            <h1>140</h1>
+                                <span>Seat</span>
+                        </div>
+                        <div>
+                            <span class="las la-chair"></span>
+                        </div>
                     </div>
-                    <div>
-                        <span class="las la-chair"></span>
+                </a>
+                <a href="/admin/logout">
+                    <div class="cards-single">
+                        <div>
+                            <h1>135</h1>
+                                <span>Logout</span>
+                        </div>
+                        <div>
+                            <span class="las la-shopping-bag"></span>
+                        </div>
                     </div>
-                </div>
-                
+                </a>
             </div>
         </main>
 
