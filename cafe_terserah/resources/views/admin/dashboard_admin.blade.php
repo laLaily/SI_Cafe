@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="styledashboard.css">
 </head>
+
 <body>
     <div class="sidebar">
         <div class="sidebar-brand">
@@ -71,16 +73,16 @@
                 <div class="cards-single">
                     <div>
                         <h1>3</h1>
-                            <span>Admin</span>
-                    </div>    
+                        <span>Admin</span>
+                    </div>
                     <div>
                         <span class="las la-users"></span>
-                    </div>    
+                    </div>
                 </div>
                 <div class="cards-single">
                     <div>
                         <h1>135</h1>
-                            <span>Transaksi</span>
+                        <span>Transaksi</span>
                     </div>
                     <div>
                         <span class="las la-shopping-cart"></span>
@@ -89,17 +91,17 @@
                 <div class="cards-single">
                     <div>
                         <h1>70</h1>
-                            <span>Reservasi</span>
+                        <span>Reservasi</span>
                     </div>
                     <div>
                         <span class="las la-plus"></span>
                     </div>
                 </div>
-                
+
                 <div class="cards-single">
                     <div>
                         <h1>135</h1>
-                            <span>Detail Trx</span>
+                        <span>Detail Trx</span>
                     </div>
                     <div>
                         <span class="las la-shopping-bag"></span>
@@ -109,28 +111,29 @@
                     <div class="cards-single">
                         <div>
                             <h1>20</h1>
-                                <span>Produk</span>
+                            <span>Produk</span>
                         </div>
                         <div>
                             <span class="las la-hamburger"></span>
                         </div>
                     </div>
                 </a>
-                
-                
+
+
                 <div class="cards-single">
                     <div>
                         <h1>140</h1>
-                            <span>Seat</span>
+                        <span>Seat</span>
                     </div>
                     <div>
                         <span class="las la-chair"></span>
                     </div>
                 </div>
-                
+
             </div>
         </main>
 
     </div>
 </body>
+
 </html>

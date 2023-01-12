@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DetailDineinTransaction;
 use App\Models\DineinTransaction;
 use App\Models\Product;
 use App\Models\ReservationTransaction;
@@ -26,9 +27,10 @@ class DineinTransactionController extends Controller
         }
     }
 
-    public function getDineintransaction(){
+    public function getDineintransaction()
+    {
         $dinein = DineinTransaction::all();
-        return view('admin.transaction_admin', ['dineinTransactions'=>$dinein]);
+        return view('admin.transaction_admin', ['dineinTransactions' => $dinein]);
     }
 
     public function createDineinTransactionReservation(Request $request)
@@ -104,8 +106,9 @@ class DineinTransactionController extends Controller
         $filterMakanan = Product::where('product_category', 'food')->get();
         $filterMinuman = Product::where('product_category', 'beverage')->get();
         $filterDesert = Product::where('product_category', 'dessert')->get();
+        $totalProductCart = DetailDineinTransaction::where('dinein_id', $request->session()->get('session_token'))->sum('quantity');
 
-        return view('order.dinein_order', ['products' => $products, 'transactions' => $transactions, 'carts' => $carts, 'filterMakanan' => $filterMakanan, 'filterMinuman' => $filterMinuman, 'filterDesert' => $filterDesert]);
+        return view('order.dinein_order', ['products' => $products, 'transactions' => $transactions, 'carts' => $carts, 'filterMakanan' => $filterMakanan, 'filterMinuman' => $filterMinuman, 'filterDesert' => $filterDesert, 'totalProduct' => $totalProductCart]);
     }
 
     public function submitCart(Request $request)
@@ -123,7 +126,8 @@ class DineinTransactionController extends Controller
         }
     }
 
-    public function getOneTransactionWithProduct($id){
+    public function getOneTransactionWithProduct($id)
+    {
         $dinein = DineinTransaction::join('seats', 'seats.id', '=', 'dinein_transactions.seat_id')->where('id', $id);
         $dineins = DineinTransaction::join('detail_dinein_transactions', 'dinein_transactions.id', '=', 'detail_dinein_transactions.dinein_id')
             ->join('products', 'products.id', '=', 'detail_dinein_transactions.product_id')
@@ -131,15 +135,16 @@ class DineinTransactionController extends Controller
             ->where('dinein_transactions.id', $id)
             ->get();
 
-        return view('admin.detailtrx_admin', ['dineintrx'=>$dinein, 'detail'=>$dineins]);
+        return view('admin.detailtrx_admin', ['dineintrx' => $dinein, 'detail' => $dineins]);
     }
 
-    public function updateStatusTransaction(Request $request, $id){
+    public function updateStatusTransaction(Request $request, $id)
+    {
         $status = DineinTransaction::find($id);
 
         $status->status = $request->input('success');
-        
-        $status->updater_id=$request->session()->get('token');
+
+        $status->updater_id = $request->session()->get('token');
         $status->save();
         return redirect('/admin/dineintrx/view');
     }

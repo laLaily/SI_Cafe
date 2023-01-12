@@ -66,10 +66,12 @@
             </div>
             <!-- Button trigger modal -->
             <div>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                    <p>Cart</p>
-                    <p>{{ }}/{{ $transactions->totalPrice }}</p>
-                </button>
+                @foreach($transactions as $transaction)
+                <div class="btn-group" role="group" aria-label="Basic outlined example">
+                    <button type="button" class="btn btn-outline-dark" disabled>{{ $totalProduct }}/Rp.{{ $transaction->total_price }},-</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Cart</button>
+                </div>
+                @endforeach
             </div>
         </div>
 
