@@ -27,8 +27,6 @@ Route::get('/', function () {
 
 
 Route::prefix('/admin')->group(function () {
-    Route::get('/get', [AdminController::class, 'getAdmins']);
-
     Route::post('/create', [AdminController::class, 'insertAdmin']);
     Route::get('/login', function () {
         return view('admin.login_admin');
@@ -37,6 +35,10 @@ Route::prefix('/admin')->group(function () {
     Route::delete('/delete/{id}', [AdminController::class, 'deleteAdmin']);
 
     Route::middleware(['myauth'])->group(function () {
+        Route::post('/create', [AdminController::class, 'insertAdmin']);
+        Route::get('/view/{id}', [AdminController::class, 'getAdmin']);
+        Route::post('/update/process/{id}', [AdminController::class, 'updatePasswordAdmin']);
+        
         Route::get('/logout', [AdminController::class, 'logoutAdmin']);
         Route::get('/dashboard', [AdminController::class, 'getAdmin']);
         Route::put('/change/password/{id}', [AdminController::class, 'updatePasswordAdmin']);
@@ -51,13 +53,15 @@ Route::prefix('/admin')->group(function () {
 
         Route::prefix('/seat')->group(function () {
             Route::post('/create', [SeatController::class, 'createSeat']);
-            Route::get('/view', [SeatController::class, 'getSeats']);
-            Route::get('/viewSeat', [SeatController::class, 'getSeatList']);
+            Route::get('/view', [SeatController::class, 'getSeatList']);
             Route::get('/view/{id}', [SeatController::class, 'getOneSeat']);
             Route::post('/delete/{id}', [SeatController::class, 'deleteSeat']);
             Route::post('/update/process/{id}', [SeatController::class, 'updateSeat']);
         });
 
+<<<<<<< HEAD
+        Route::prefix('/dineintrx')->group(function(){
+=======
         Route::prefix('/admin')->group(function () {
             Route::post('/create', [AdminController::class, 'insertAdmin']);
             Route::get('/view', [AdminController::class, 'getAdmins']);
@@ -66,6 +70,7 @@ Route::prefix('/admin')->group(function () {
         });
 
         Route::prefix('/dineintrx')->group(function () {
+>>>>>>> f08f9746a814718b452eb41d7c2ab16ea4ec8a82
             Route::get('/view', [DineinTransactionController::class, 'getDineintransaction']);
             Route::get('/view/{id}', [DineinTransactionController::class, 'getOneTransactionWithProduct']);
             Route::post('/update/status/{id}', [DineinTransactionController::class, 'updateStatusTransaction']);
