@@ -59,4 +59,6 @@ class DetailDineinTransactionController extends Controller
         $data = DetailDineInTransaction::where('dinein_transactions_id', $request->session()->get('session_token'))->get();
         return $data->toArray();
     }
+
+    
 }

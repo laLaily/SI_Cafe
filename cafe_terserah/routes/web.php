@@ -60,11 +60,13 @@ Route::prefix('/admin')->group(function () {
             Route::post('/create', [AdminController::class, 'insertAdmin']);
             Route::get('/view', [AdminController::class, 'getAdmins']);
             Route::post('/update/process/{id}', [AdminController::class, 'updatePasswordAdmin']);
-            Route::delete('/delete/{id}', [AdminController::class, 'deleteAdmin']);
+            Route::get('/delete/{id}', [AdminController::class, 'deleteAdmin']);
         });
 
         Route::prefix('/dineintrx')->group(function(){
             Route::get('/view', [DineinTransactionController::class, 'getDineintransaction']);
+            Route::get('/view/{id}', [DineinTransactionController::class, 'getOneTransactionWithProduct']);
+            Route::post('/update/status/{id}', [DineinTransactionController::class, 'updateStatusTransaction']);
         });
 
         Route::prefix('/reservationtrx')->group(function(){
