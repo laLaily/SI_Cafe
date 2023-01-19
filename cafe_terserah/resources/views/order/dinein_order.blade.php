@@ -11,39 +11,78 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        function filterMakanan() {
-            document.querySelector(`#filterMinuman`).style.display = 'none';
-            document.querySelector(`#filterDesert`).style.display = 'none';
-            document.querySelector(`#nofilter`).style.display = 'none';
-            document.querySelector(`#filterMakanan`).style.display = 'inline';
-        }
+        // function filterMakanan() {
+        //     document.querySelector(`#filterMinuman`).style.display = 'none';
+        //     document.querySelector(`#filterDesert`).style.display = 'none';
+        //     document.querySelector(`#nofilter`).style.display = 'none';
+        //     document.querySelector(`#filterMakanan`).style.display = 'inline';
+        // }
 
-        function filterMinuman() {
-            document.querySelector(`#filterMakanan`).style.display = 'none';
-            document.querySelector(`#filterDesert`).style.display = 'none';
-            document.querySelector(`#nofilter`).style.display = 'none';
-            document.querySelector(`#filterMinuman`).style.display = 'inline';
-        }
+        // function filterMinuman() {
+        //     document.querySelector(`#filterMakanan`).style.display = 'none';
+        //     document.querySelector(`#filterDesert`).style.display = 'none';
+        //     document.querySelector(`#nofilter`).style.display = 'none';
+        //     document.querySelector(`#filterMinuman`).style.display = 'inline';
+        // }
 
-        function filterDesert() {
-            document.querySelector(`#filterMakanan`).style.display = 'none';
-            document.querySelector(`#filterMinuman`).style.display = 'none';
-            document.querySelector(`#nofilter`).style.display = 'none';
-            document.querySelector(`#filterDesert`).style.display = 'inline';
-        }
+        // function filterDesert() {
+        //     document.querySelector(`#filterMakanan`).style.display = 'none';
+        //     document.querySelector(`#filterMinuman`).style.display = 'none';
+        //     document.querySelector(`#nofilter`).style.display = 'none';
+        //     document.querySelector(`#filterDesert`).style.display = 'inline';
+        // }
 
-        function filterAll() {
-            document.querySelector(`#filterMakanan`).style.display = 'none';
-            document.querySelector(`#filterMinuman`).style.display = 'none';
-            document.querySelector(`#filterDesert`).style.display = 'none';
-            document.querySelector(`#nofilter`).style.display = 'inline';
-        }
+        // function filterAll() {
+        //     document.querySelector(`#filterMakanan`).style.display = 'none';
+        //     document.querySelector(`#filterMinuman`).style.display = 'none';
+        //     document.querySelector(`#filterDesert`).style.display = 'none';
+        //     document.querySelector(`#nofilter`).style.display = 'inline';
+        // }
+
+        // function filter() {
+        //     $.ajax({
+        //         url: "/dinein/order/products",
+        //         method: "GET",
+        //         data: {
+        //             "filter": $('#filter option:selected').val()
+        //         },
+        //         success: function(data) {
+        //             $('html').html(data);
+        //         }
+        //     })
+        // }
+
+        // function deleteProductCart(param) {
+        //     $.ajax({
+        //         url: "/dinein/order/products/delete",
+        //         method: "POST",
+        //         data: {
+        //             product_id: $('#product_id_delete_' + param).val()
+        //         },
+        //         success: function(data) {
+        //             $('.dinein').html(data);
+        //         }
+        //     })
+        // }
+
+        // function insertCart(param) {
+        //     $.ajax({
+        //         url: "/dinein/order/products/process",
+        //         method: "POST",
+        //         data: {
+        //             product_id: $('#product_id_insert_' + param).val(),
+        //             quantity: $('#quantity').val()
+        //         },
+        //         success: function(data) {
+        //             $('.dinein').html(data);
+        //         }
+        //     })
+        // }
     </script>
 </head>
 
-<body>
+<body class="dinein">
     <header>
         <div class="logo">
             <a href="/"><img src="" alt="logo-cafe"></a>
@@ -57,26 +96,30 @@
     </header>
     <main>
         <div class="d-flex justify-content-between align-items-center mx-5 my-2">
-            <div>
-                <p>Filter</p>
-                <button id="btnall" onclick="filterAll()">All</button>
-                <button id="btnfiltermakanan" onclick="filterMakanan()">Food</button>
-                <button id="btnfilterminuman" onclick="filterMinuman()">Beverage</button>
-                <button id="btnfilterdesert" onclick="filterDesert()">Dessert</button>
-            </div>
+            <form action="/dinein/order/products/filter" method="post">
+                <div class="input-group" style="width: 400px;">
+                    <select class="form-select" name="filter" id="filter" aria-label="Example select with button addon">
+                        <option selected value="">All</option>
+                        <option value="food">food</option>
+                        <option value="beverage">beverage</option>
+                        <option value="dessert">dessert</option>
+                    </select>
+                    <button class="btn btn-primary" type="submit">Filter</button>
+                </div>
+            </form>
             <!-- Button trigger modal -->
             <div>
                 @foreach($transactions as $transaction)
                 <div class="btn-group" role="group" aria-label="Basic outlined example">
                     <button type="button" class="btn btn-outline-dark" disabled>{{ $totalProduct }}/Rp.{{ $transaction->total_price }},-</button>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Cart</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cart">Cart</button>
                 </div>
                 @endforeach
             </div>
         </div>
 
         <!-- Modal -->
-        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal fade" id="cart" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -181,180 +224,6 @@
 
                                 <!-- Modal -->
                                 <div class="modal fade" id="staticBackdrop-all-{{$product->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                    <form action="/dinein/order/products/process" method="post">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Order Quantity</h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        <label for="staticEmail" class="col-sm-5 col-form-label">Product Name</label>
-                                                        <div class="col-sm-5">
-                                                            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{ $product->product_name }}">
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <label for="staticEmail" class="col-sm-5 col-form-label">Quantity</label>
-                                                        <div class="col-sm-5">
-                                                            <input type="number" value="1" min="1" max="100" name="quantity" id="quantity" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                    <input type="hidden" name="product_id" id="product_id" value="{{ $product->id }}">
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Add to Cart</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div id="filterMakanan" style="display: none;">
-                <div style="list-style: none;">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th scope="col">No</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Category</th>
-                                <th scope="col">Price</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($filterMakanan as $product)
-                            <!-- trigger modal -->
-                            <tr data-bs-toggle="modal" data-bs-target="#staticBackdrop-makanan-{{$product->id}}" style="cursor: pointer;">
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $product->product_name }}</td>
-                                <td>{{ $product->product_category }}</td>
-                                <td>{{ $product->product_price }}</td>
-
-                                <!-- Modal -->
-                                <div class="modal fade" id="staticBackdrop-makanan-{{$product->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                    <form action="/dinein/order/products/process" method="post">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Order Quantity</h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        <label for="staticEmail" class="col-sm-5 col-form-label">Product Name</label>
-                                                        <div class="col-sm-5">
-                                                            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{ $product->product_name }}">
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <label for="staticEmail" class="col-sm-5 col-form-label">Quantity</label>
-                                                        <div class="col-sm-5">
-                                                            <input type="number" value="1" min="1" max="100" name="quantity" id="quantity" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                    <input type="hidden" name="product_id" id="product_id" value="{{ $product->id }}">
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Add to Cart</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div id="filterMinuman" style="display: none;">
-                <div style="list-style: none;">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th scope="col">No</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Category</th>
-                                <th scope="col">Price</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($filterMinuman as $product)
-                            <!-- trigger modal -->
-                            <tr data-bs-toggle="modal" data-bs-target="#staticBackdrop-minuman-{{$product->id}}" style="cursor: pointer;">
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $product->product_name }}</td>
-                                <td>{{ $product->product_category }}</td>
-                                <td>{{ $product->product_price }}</td>
-
-                                <!-- Modal -->
-                                <div class="modal fade" id="staticBackdrop-minuman-{{$product->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                    <form action="/dinein/order/products/process" method="post">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Order Quantity</h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        <label for="staticEmail" class="col-sm-5 col-form-label">Product Name</label>
-                                                        <div class="col-sm-5">
-                                                            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{ $product->product_name }}">
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <label for="staticEmail" class="col-sm-5 col-form-label">Quantity</label>
-                                                        <div class="col-sm-5">
-                                                            <input type="number" value="1" min="1" max="100" name="quantity" id="quantity" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                    <input type="hidden" name="product_id" id="product_id" value="{{ $product->id }}">
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Add to Cart</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div id="filterDesert" style="display: none;">
-                <div style="list-style: none;">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th scope="col">No</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Category</th>
-                                <th scope="col">Price</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($filterDesert as $product)
-                            <!-- trigger modal -->
-                            <tr data-bs-toggle="modal" data-bs-target="#staticBackdrop-desert-{{$product->id}}" style="cursor: pointer;">
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $product->product_name }}</td>
-                                <td>{{ $product->product_category }}</td>
-                                <td>{{ $product->product_price }}</td>
-
-                                <!-- Modal -->
-                                <div class="modal fade" id="staticBackdrop-desert-{{$product->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <form action="/dinein/order/products/process" method="post">
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">

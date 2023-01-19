@@ -7,54 +7,121 @@ use App\Models\DineinTransaction;
 use App\Models\Product;
 use App\Models\ReservationTransaction;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class DineinTransactionController extends Controller
 {
     public function createDineinTransaction(Request $request)
     {
-        $dinein = new DineinTransaction();
-        $dinein->customer_name = $request->input('customer_name');
-        $dinein->seat_id = $request->input('seat_id');
-        $dinein->save();
+        if ($request->session()->has('res_token')) {
+            $dat = ReservationTransaction::find($request->session()->get('res_token'));
 
-        $data = DineinTransaction::where('customer_name', $request->input('customer_name'))->where('seat_id', $request->input('seat_id'))->orderBy('id', 'desc')->first();
+            $dinein = new DineinTransaction();
+            $dinein->customer_name = $dat->customer_name;
+            $dinein->seat_id = $request->input('seat_id');
+            $dinein->transaction_date = $dat->reservation_date;
+            $dinein->save();
 
-        if ($data != NULL) {
-            $request->session()->put('session_token', $data->id);
-            return redirect('/dinein/order/products');
+            $data = DineinTransaction::where('customer_name', $dat->customer_name)->where('seat_id', $request->input('seat_id'))->orderBy('id', 'desc')->first();
+
+            $update = ReservationTransaction::find($request->session()->get('res_token'));
+            $update->dinein_id = $data->id;
+            $update->save();
+
+            if ($data != NULL) {
+                $request->session()->put('session_token', $data->id);
+                return redirect('/dinein/order/products');
+            } else {
+                return redirect('/dinein/order');
+            }
         } else {
-            return redirect('/dinein/order');
+            $dinein = new DineinTransaction();
+            $dinein->customer_name = $request->input('customer_name');
+            $dinein->seat_id = $request->input('seat_id');
+            $dinein->save();
+
+            $data = DineinTransaction::where('customer_name', $request->input('customer_name'))->where('seat_id', $request->input('seat_id'))->orderBy('id', 'desc')->first();
+
+            if ($data != NULL) {
+                $request->session()->put('session_token', $data->id);
+                return redirect('/dinein/order/products');
+            } else {
+                return redirect('/dinein/order');
+            }
         }
     }
 
-    public function getDineintransaction()
+    public function getDineinTransaction(Request $request)
     {
-        $dinein = DineinTransaction::all();
-        return view('admin.transaction_admin', ['dineinTransactions' => $dinein]);
+        if ($request->old('transaction_date') == null || $request->old('transaction_date') == "") {
+            $dinein = DineinTransaction::all();
+            return view('admin.transaction_admin', ['dineinTransactions' => $dinein]);
+        } else {
+            $data = $request->old('transaction_date');
+            $dataArr = explode(',', $data);
+            $dinein = DineinTransaction::whereBetween('transaction_date', $dataArr)->get();
+            return view('admin.transaction_admin', ['dineinTransactions' => $dinein])->render();
+        }
     }
 
-    public function createDineinTransactionReservation(Request $request)
+    public function filterDineinTransactionByDate()
     {
-        $dat = ReservationTransaction::find($request->session()->get('res_token'));
+        return redirect('/admin/dineintrx/view')->withInput();
+    }
 
-        $dinein = new DineinTransaction();
-        $dinein->customer_name = $dat->customer_name;
-        $dinein->seat_id = $request->input('seat_id');
-        $dinein->transaction_date = $dat->reservation_date;
-        $dinein->save();
+    public function recapDineinTransaction(Request $request)
+    {
+        $income = null;
+        $date = null;
+        if ($request->input('filter') == null || $request->input('filter') == 'week') {
+            $rekap = DineinTransaction::selectRaw('SUM(total_price) as income, CONCAT(YEAR(transaction_date),\'-\',WEEK(transaction_date)) as year_week, COUNT(*) as total_transaction')->groupBy('year_week')->orderBy('year_week')->get();
+            $income = null;
+            $i = 0;
+            foreach ($rekap as $r) {
+                $income[$i] = $r->income;
+                $i++;
+            }
 
-        $data = DineinTransaction::where('customer_name', $dat->customer_name)->where('seat_id', $request->input('seat_id'))->orderBy('id', 'desc')->first();
-
-        $update = ReservationTransaction::find($request->session()->get('res_token'));
-        $update->dinein_id = $data->id;
-        $update->save();
-
-        if ($data != NULL) {
-            $request->session()->put('session_token', $data->id);
-            return redirect('/dinein/order/products');
+            $date = null;
+            $i = 0;
+            foreach ($rekap as $r) {
+                $date[$i] = $r->year_week;
+                $i++;
+            }
         } else {
-            return redirect('/dinein/order');
+            if ($request->input('filter') == 'month') {
+                $rekap = DineinTransaction::selectRaw('SUM(total_price) as income, CONCAT(YEAR(transaction_date),\'-\',MONTH(transaction_date)) as year_months, COUNT(*) as total_transaction')->groupBy('year_months')->orderBy('year_months')->get();
+                $income = null;
+                $i = 0;
+                foreach ($rekap as $r) {
+                    $income[$i] = $r->income;
+                    $i++;
+                }
+
+                $date = null;
+                $i = 0;
+                foreach ($rekap as $r) {
+                    $date[$i] = $r->year_months;
+                    $i++;
+                }
+            } else if ($request->input('filter') == 'year') {
+                $rekap = DineinTransaction::selectRaw('SUM(total_price) as income, YEAR(transaction_date) as year, COUNT(*) as total_transaction')->groupBy('year')->orderBy('year')->get();
+                $income = null;
+                $i = 0;
+                foreach ($rekap as $r) {
+                    $income[$i] = $r->income;
+                    $i++;
+                }
+
+                $date = null;
+                $i = 0;
+                foreach ($rekap as $r) {
+                    $date[$i] = $r->year;
+                    $i++;
+                }
+            }
         }
+        return response()->json(['income' => $income, 'date' => $date]);
     }
 
     public function getProductTransactionUserWithProduct($id)
@@ -63,17 +130,6 @@ class DineinTransactionController extends Controller
             ->join('products', 'products.id', '=', 'detail_dinein_transactions.product_id')
             ->select('detail_dinein_transactions.product_id', 'products.product_name', 'detail_dinein_transactions.quantity', 'detail_dinein_transactions.quantity_price')
             ->where('dinein_transactions.id', $id)
-            ->get();
-
-        return $dinein;
-    }
-
-    public function getProductTransactionUserWithProductTest(Request $request)
-    {
-        $dinein = DineinTransaction::join('detail_dinein_transactions', 'dinein_transactions.id', '=', 'detail_dinein_transactions.dinein_id')
-            ->join('products', 'products.id', '=', 'detail_dinein_transactions.product_id')
-            ->select('detail_dinein_transactions.product_id', 'products.product_name', 'detail_dinein_transactions.quantity', 'detail_dinein_transactions.quantity_price')
-            ->where('dinein_transactions.id', $request->input('dinein_transaction_id'))
             ->get();
 
         return $dinein;
@@ -97,18 +153,28 @@ class DineinTransactionController extends Controller
 
     public function userCart(Request $request)
     {
-        $products = Product::all();
-
         $transactions = $this->getDineinTransactionUserWithSeatNumber($request->session()->get('session_token'));
-
         $carts = $this->getProductTransactionUserWithProduct($request->session()->get('session_token'));
-
-        $filterMakanan = Product::where('product_category', 'food')->get();
-        $filterMinuman = Product::where('product_category', 'beverage')->get();
-        $filterDesert = Product::where('product_category', 'dessert')->get();
+        $products = null;
+        if ($request->old('filter') == null || $request->old('filter') == '') {
+            $products = Product::all();
+        } else {
+            if ($request->old('filter') == 'food') {
+                $products = Product::where('product_category', 'food')->get();
+            } else if ($request->old('filter') == 'beverage') {
+                $products = Product::where('product_category', 'beverage')->get();
+            } else if ($request->old('filter') == 'dessert') {
+                $products = Product::where('product_category', 'dessert')->get();
+            }
+        }
         $totalProductCart = DetailDineinTransaction::where('dinein_id', $request->session()->get('session_token'))->sum('quantity');
 
-        return view('order.dinein_order', ['products' => $products, 'transactions' => $transactions, 'carts' => $carts, 'filterMakanan' => $filterMakanan, 'filterMinuman' => $filterMinuman, 'filterDesert' => $filterDesert, 'totalProduct' => $totalProductCart]);
+        return view('order.dinein_order', ['products' => $products, 'transactions' => $transactions, 'carts' => $carts, 'totalProduct' => $totalProductCart])->render();
+    }
+
+    public function filterProductByCategory()
+    {
+        return redirect('/dinein/order/products')->withInput();
     }
 
     public function submitCart(Request $request)
@@ -143,9 +209,10 @@ class DineinTransactionController extends Controller
         $status = DineinTransaction::find($id);
 
         $status->status = $request->input('success');
-
+        $status->updated_at = Carbon::now()->setTimezone('Asia/Phnom_Penh');
         $status->updater_id = $request->session()->get('token');
         $status->save();
+
         return redirect('/admin/dineintrx/view');
     }
 }

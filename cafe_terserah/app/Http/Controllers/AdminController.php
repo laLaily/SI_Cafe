@@ -48,10 +48,16 @@ class AdminController extends Controller
 
         if (Hash::check($request->input('password'), $admin->password)) {
             $request->session()->put('token', $admin->id);
-            return view('admin.dashboard_admin',["admin"=>$admin]);
+            return redirect('/admin/dashboard');
         } else {
             return redirect('/admin/login');
         }
+    }
+
+    public function dashboardAdmin(Request $request)
+    {
+        $admin = Admin::find($request->session()->get('token'));
+        return view('admin.dashboard_admin', ["admin" => $admin]);
     }
 
     public function logoutAdmin(Request $request)

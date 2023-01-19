@@ -24,26 +24,30 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <div class="row">
+                            <div class="row mb-2">
                                 <label for="staticEmail" class="col-sm-5 col-form-label">Product Name</label>
                                 <div class="col-sm-5">
-                                    <input type="text" id="product_name" name="product_name">
+                                    <input class="form-control" type="text" id="product_name" name="product_name">
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row mb-2">
                                 <label for="staticEmail" class="col-sm-5 col-form-label">Category</label>
                                 <div class="col-sm-5">
-                                    <input type="text" id="product_category" name="product_category">
+                                    <select class="form-control" name="product_category" id="product_category">
+                                        <option>Chose One</option>
+                                        <option value="food">Food</option>
+                                        <option value="beverage">Beverage</option>
+                                        <option value="dessert">Desert</option>
+                                    </select>
                                 </div>
                             </div>
-                            <div class="row">
-                                <label for="staticEmail" class="col-sm-5 col-form-label">Price</label>
+                            <div class="row mb-2">
+                                <label for="product-price" class="col-sm-5 col-form-label">Price</label>
                                 <div class="col-sm-5">
-                                    <input type="text" id="product_price" name="product_price">
+                                    <input class="form-control" type="number" id="product_price" name="product_price" min="1000" max="1000000">
                                 </div>
                             </div>
-
-                            <div class="row">
+                            <div class="row mb-2">
                                 <label for="staticEmail" class="col-sm-5 col-form-label">Stock</label>
                                 <div class="col-sm-5">
                                     <input type="number" value="1" min="1" max="100" name="product_stock" id="product_stock" class="form-control">

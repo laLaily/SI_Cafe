@@ -35,13 +35,11 @@ Route::prefix('/admin')->group(function () {
     Route::delete('/delete/{id}', [AdminController::class, 'deleteAdmin']);
 
     Route::middleware(['myauth'])->group(function () {
-        Route::post('/create', [AdminController::class, 'insertAdmin']);
+        Route::get('/dashboard', [AdminController::class, 'dashboardAdmin']);
         Route::get('/view/{id}', [AdminController::class, 'getAdmin']);
         Route::post('/update/process/{id}', [AdminController::class, 'updatePasswordAdmin']);
-        
+
         Route::get('/logout', [AdminController::class, 'logoutAdmin']);
-        Route::get('/dashboard', [AdminController::class, 'getAdmin']);
-        Route::put('/change/password/{id}', [AdminController::class, 'updatePasswordAdmin']);
 
         Route::prefix('/product')->group(function () {
             Route::post('/create', [ProductController::class, 'insertProduct']);
@@ -59,21 +57,15 @@ Route::prefix('/admin')->group(function () {
             Route::post('/update/process/{id}', [SeatController::class, 'updateSeat']);
         });
 
-<<<<<<< HEAD
-        Route::prefix('/dineintrx')->group(function(){
-=======
-        Route::prefix('/admin')->group(function () {
-            Route::post('/create', [AdminController::class, 'insertAdmin']);
-            Route::get('/view', [AdminController::class, 'getAdmins']);
-            Route::post('/update/process/{id}', [AdminController::class, 'updatePasswordAdmin']);
-            Route::get('/delete/{id}', [AdminController::class, 'deleteAdmin']);
-        });
-
         Route::prefix('/dineintrx')->group(function () {
->>>>>>> f08f9746a814718b452eb41d7c2ab16ea4ec8a82
-            Route::get('/view', [DineinTransactionController::class, 'getDineintransaction']);
+            Route::get('/view', [DineinTransactionController::class, 'getDineinTransaction']);
             Route::get('/view/{id}', [DineinTransactionController::class, 'getOneTransactionWithProduct']);
             Route::post('/update/status/{id}', [DineinTransactionController::class, 'updateStatusTransaction']);
+            Route::post('/filter/process', [DineinTransactionController::class, 'filterDineinTransactionByDate']);
+            Route::post('/recap/process', [DineinTransactionController::class, 'recapDineinTransaction']);
+            Route::get('/recap', function () {
+                return view('admin.rekap_admin');
+            });
         });
 
         Route::prefix('/reservationtrx')->group(function () {
@@ -84,8 +76,9 @@ Route::prefix('/admin')->group(function () {
 
 Route::prefix('/dinein')->group(function () {
     Route::get('/order', [SeatController::class, 'getSeats']);
-    Route::post('/order/process', [DineResController::class, 'dineresControl']);
+    Route::post('/order/process', [DineinTransactionController::class, 'createDineinTransaction']);
     Route::get('/order/products', [DineinTransactionController::class, 'userCart']);
+    Route::post('/order/products/filter', [DineinTransactionController::class, 'filterProductByCategory']);
     Route::post('/order/products/process', [DetailDineinTransactionController::class, 'createDetailDineinTrasaction']);
     Route::post('/order/products/delete', [DetailDineinTransactionController::class, 'deleteProductCart']);
     Route::get('/order/submit', [DineinTransactionController::class, 'submitCart']);

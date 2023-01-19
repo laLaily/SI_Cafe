@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create("dinein_transactions", function (Blueprint $table) {
             $table->id();
             $table->string("customer_name");
-            $table->timestamp("transaction_date");
+            $table->timestamp("transaction_date")->useCurrent();
             $table->foreignId("seat_id")->constrained("seats");
             $table->integer("total_price")->default(0);
             $table->enum("status", ['in progress', 'success'])->default('in progress');

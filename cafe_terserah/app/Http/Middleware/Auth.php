@@ -19,7 +19,7 @@ class Auth
         if ($request->session()->get('token') != NULL) {
             return $next($request);
         } else {
-            return view('/admin/login');
+            return redirect('/admin/login');
         }
     }
 }
