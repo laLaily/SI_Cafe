@@ -25,7 +25,9 @@
     </header>
     <div class="align-items-center bg-light p-5 mx-auto rounded-4 position-absolute top-50 start-50 translate-middle" style="width: 550px;">
         <h1>Transaction Success</h1>
-        <button class=" btn " style="width: 225px; background: #483434; " type="submit"><a style=color:#EED6C4 href="/">back to home</a></button>
+        <div class="d-flex justify-content-center align-items-center">
+            <button class="btn" style="width: 225px; background: #483434; " type="submit"><a style="color:#EED6C4;text-decoration: none;" href="/">back to home</a></button>
+        </div>
     </div>
 </body>
 

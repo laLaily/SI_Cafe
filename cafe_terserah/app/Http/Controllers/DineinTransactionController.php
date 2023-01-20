@@ -128,7 +128,7 @@ class DineinTransactionController extends Controller
     {
         $dinein = DineinTransaction::join('detail_dinein_transactions', 'dinein_transactions.id', '=', 'detail_dinein_transactions.dinein_id')
             ->join('products', 'products.id', '=', 'detail_dinein_transactions.product_id')
-            ->select('detail_dinein_transactions.product_id', 'products.product_name', 'detail_dinein_transactions.quantity', 'detail_dinein_transactions.quantity_price')
+            ->selectRaw("CONCAT('Rp.',FORMAT(detail_dinein_transactions.quantity_price,0,'id_ID'),',-') as price_view, detail_dinein_transactions.product_id, products.product_name, detail_dinein_transactions.quantity, detail_dinein_transactions.quantity_price")
             ->where('dinein_transactions.id', $id)
             ->get();
 
@@ -138,7 +138,7 @@ class DineinTransactionController extends Controller
     public function getDineinTransactionUserWithSeatNumber($id)
     {
         $dinein = DineinTransaction::join('seats', 'seats.id', '=', 'dinein_transactions.seat_id')
-            ->select('dinein_transactions.*', 'seats.seat_number')
+            ->selectRaw("CONCAT('Rp.',FORMAT(dinein_transactions.total_price,0,'id_ID'),',-') as price_view,dinein_transactions.*, seats.seat_number")
             ->where('dinein_transactions.id', $id)
             ->get();
 
@@ -157,14 +157,14 @@ class DineinTransactionController extends Controller
         $carts = $this->getProductTransactionUserWithProduct($request->session()->get('session_token'));
         $products = null;
         if ($request->old('filter') == null || $request->old('filter') == '') {
-            $products = Product::all();
+            $products = Product::selectRaw("*, CONCAT('Rp.',FORMAT(product_price,0,'id_ID'),',-') as price_view")->get();
         } else {
             if ($request->old('filter') == 'food') {
-                $products = Product::where('product_category', 'food')->get();
+                $products = Product::selectRaw("*, CONCAT('Rp.',FORMAT(product_price,0,'id_ID'),',-') as price_view")->where('product_category', 'food')->get();
             } else if ($request->old('filter') == 'beverage') {
-                $products = Product::where('product_category', 'beverage')->get();
+                $products = Product::selectRaw("*, CONCAT('Rp.',FORMAT(product_price,0,'id_ID'),',-') as price_view")->where('product_category', 'beverage')->get();
             } else if ($request->old('filter') == 'dessert') {
-                $products = Product::where('product_category', 'dessert')->get();
+                $products = Product::selectRaw("*, CONCAT('Rp.',FORMAT(product_price,0,'id_ID'),',-') as price_view")->where('product_category', 'dessert')->get();
             }
         }
         $totalProductCart = DetailDineinTransaction::where('dinein_id', $request->session()->get('session_token'))->sum('quantity');

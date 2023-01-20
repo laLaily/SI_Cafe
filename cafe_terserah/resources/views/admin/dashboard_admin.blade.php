@@ -42,6 +42,10 @@
                         <span>Data Seat</span></a>
                 </li>
                 <li>
+                    <a href="/admin/dineintrx/recap"><span class="las la-shopping-bag"></span>
+                        <span>Data Recap Transaction</span></a>
+                </li>
+                <li>
                     <a href="/admin/logout"><span class="las la-shopping-bag"></span>
                         <span>Logout</span></a>
                 </li>
@@ -125,11 +129,11 @@
                         </div>
                     </div>
                 </a>
-                <a href="/admin/logout">
+                <a href="/admin/dineintrx/recap">
                     <div class="cards-single">
                         <div>
                             <h1>135</h1>
-                            <span>Logout</span>
+                            <span>Recap</span>
                         </div>
                         <div>
                             <span class="las la-shopping-bag"></span>
