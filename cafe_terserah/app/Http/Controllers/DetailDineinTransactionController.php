@@ -25,7 +25,7 @@ class DetailDineinTransactionController extends Controller
             $det->save();
 
             $dine = DineinTransaction::find($request->session()->get('session_token'));
-            $dine->total_price += ($request->input('quantity') * $dataprod->product_price);
+            $dine->total_price += ($request->input('quantity') * ($dataprod->product_price + $dataprod->product_price*0.1));
             $dine->save();
         } else {
             $dataprod = Product::find($request->input('product_id'));
@@ -34,7 +34,7 @@ class DetailDineinTransactionController extends Controller
                 ->update(['quantity' => ($data->quantity + $request->input('quantity')), 'quantity_price' => ($data->quantity_price + ($request->input('quantity') * $dataprod->product_price))]);
 
             $dine = DineinTransaction::find($request->session()->get('session_token'));
-            $dine->total_price += ($request->input('quantity') * $dataprod->product_price);
+            $dine->total_price += ($request->input('quantity') * ($dataprod->product_price + $dataprod->product_price*0.1));
             $dine->save();
         }
 

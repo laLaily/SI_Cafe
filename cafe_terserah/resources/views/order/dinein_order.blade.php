@@ -123,7 +123,7 @@
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Cart</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -145,6 +145,12 @@
                                 <label for="transaction_date" class="col-sm-5 col-form-label">Transaction Date</label>
                                 <div class="col-sm-5">
                                     <input type="text" readonly class="form-control-plaintext" id="transaction_date" value="{{ $transaction->transaction_date }}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="total_price" class="col-sm-5 col-form-label">Tax</label>
+                                <div class="col-sm-5">
+                                    <input type="text" readonly class="form-control-plaintext" id="total_price" value="10%">
                                 </div>
                             </div>
                             <div class="row">

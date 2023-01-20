@@ -57,6 +57,11 @@ Route::prefix('/admin')->group(function () {
             Route::post('/update/process/{id}', [SeatController::class, 'updateSeat']);
         });
 
+        Route::prefix('/admin')->group(function () {
+            Route::get('/view/{id}', [AdminController::class, 'getAadmin']);
+            Route::post('/update/process/{id}', [AdminController::class, 'updatePasswordAdmin']);
+        });
+
         Route::prefix('/dineintrx')->group(function () {
             Route::get('/view', [DineinTransactionController::class, 'getDineinTransaction']);
             Route::get('/view/{id}', [DineinTransactionController::class, 'getOneTransactionWithProduct']);

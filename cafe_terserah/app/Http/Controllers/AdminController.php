@@ -25,7 +25,7 @@ class AdminController extends Controller
     public function getAdmin($id)
     {
         $admin = Admin::find($id);
-        return view('admin.admin_admin', ['admin' => $admin]);;
+        return view('admin.admin_admin', ['admin' => $admin]);
     }
 
     public function updatePasswordAdmin(Request $request)
