@@ -12,34 +12,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script>
-        // function filterMakanan() {
-        //     document.querySelector(`#filterMinuman`).style.display = 'none';
-        //     document.querySelector(`#filterDesert`).style.display = 'none';
-        //     document.querySelector(`#nofilter`).style.display = 'none';
-        //     document.querySelector(`#filterMakanan`).style.display = 'inline';
-        // }
-
-        // function filterMinuman() {
-        //     document.querySelector(`#filterMakanan`).style.display = 'none';
-        //     document.querySelector(`#filterDesert`).style.display = 'none';
-        //     document.querySelector(`#nofilter`).style.display = 'none';
-        //     document.querySelector(`#filterMinuman`).style.display = 'inline';
-        // }
-
-        // function filterDesert() {
-        //     document.querySelector(`#filterMakanan`).style.display = 'none';
-        //     document.querySelector(`#filterMinuman`).style.display = 'none';
-        //     document.querySelector(`#nofilter`).style.display = 'none';
-        //     document.querySelector(`#filterDesert`).style.display = 'inline';
-        // }
-
-        // function filterAll() {
-        //     document.querySelector(`#filterMakanan`).style.display = 'none';
-        //     document.querySelector(`#filterMinuman`).style.display = 'none';
-        //     document.querySelector(`#filterDesert`).style.display = 'none';
-        //     document.querySelector(`#nofilter`).style.display = 'inline';
-        // }
-
         // function filter() {
         //     $.ajax({
         //         url: "/dinein/order/products",
@@ -80,9 +52,65 @@
         //     })
         // }
     </script>
+    <style>
+        footer {
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            height: 28px;
+        }
+
+        main {
+            background-color: #EED6C4;
+        }
+
+        .products {
+            margin: 10px;
+            overflow-y: scroll;
+            height: 450px;
+            border: 2px solid #483434;
+        }
+
+        .products thead {
+            background-color: #483434;
+            color: #FFF3E4;
+        }
+
+        .products tbody {
+            color: #483434;
+        }
+
+        .button {
+            color: #FFF3E4;
+            background-color: #6B4F4F;
+            border: 1px solid #6B4F4F;
+        }
+
+        .button:hover {
+            background-color: #483434;
+            color: #EED6C4;
+            border: 1px solid #483434;
+        }
+
+        .modal {
+            color: #483434;
+        }
+
+        .modal-header {
+            background-color: #EED6C4;
+        }
+
+        .modal-body {
+            background-color: #FFF3E4;
+        }
+
+        .modal-footer {
+            background-color: #EED6C4;
+        }
+    </style>
 </head>
 
-<body class="dinein">
+<body>
     <header>
         <div class="logo">
             <a href="/"><img src="" alt="logo-cafe"></a>
@@ -94,7 +122,7 @@
             <a href="">Galeri</a>
         </div>
     </header>
-    <main>
+    <main class="p-3">
         <div class="d-flex justify-content-between align-items-center mx-5 my-2">
             <form action="/dinein/order/products/filter" method="post">
                 <div class="input-group" style="width: 400px;">
@@ -104,15 +132,15 @@
                         <option value="beverage">beverage</option>
                         <option value="dessert">dessert</option>
                     </select>
-                    <button class="btn btn-primary" type="submit">Filter</button>
+                    <button class="btn button" type="submit">Filter</button>
                 </div>
             </form>
             <!-- Button trigger modal -->
             <div>
                 @foreach($transactions as $transaction)
                 <div class="btn-group" role="group" aria-label="Basic outlined example">
-                    <button type="button" class="btn btn-outline-dark" disabled>{{ $totalProduct }}/Rp.{{ $transaction->total_price }},-</button>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cart">Cart</button>
+                    <button type="button" class="btn btn-outline-dark" disabled>{{ $totalProduct }}/{{ $transaction->price_view }}</button>
+                    <button type="button" class="btn button" data-bs-toggle="modal" data-bs-target="#cart">Cart</button>
                 </div>
                 @endforeach
             </div>
@@ -156,12 +184,12 @@
                             <div class="row">
                                 <label for="total_price" class="col-sm-5 col-form-label">Total Price</label>
                                 <div class="col-sm-5">
-                                    <input type="text" readonly class="form-control-plaintext" id="total_price" value="{{ $transaction->total_price }}">
+                                    <input type="text" readonly class="form-control-plaintext" id="total_price" value="{{ $transaction->price_view }}">
                                 </div>
                             </div>
                             @endforeach
                         </div>
-                        <div style="list-style: none;">
+                        <div>
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
@@ -178,7 +206,7 @@
                                         <tr>
                                             <td>{{ $cart->product_name }}</td>
                                             <td>{{ $cart->quantity }}</td>
-                                            <td>{{ $cart->quantity_price }}</td>
+                                            <td>{{ $cart->price_view }}</td>
 
                                             <input type="hidden" name="product_id" id="product_id" value="{{ $cart->product_id }}">
 
@@ -200,7 +228,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">
+                        <button type="button" class="btn button">
                             <a href="/dinein/order/submit" class="link-light text-decoration-none">Confim Order</a>
                         </button>
                     </div>
@@ -208,64 +236,60 @@
             </div>
         </div>
         <div class="products">
-            <div id="nofilter" style="display: static;">
-                <div style="list-style: none;">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th scope="col">No</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Category</th>
-                                <th scope="col">Price</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($products as $product)
-                            <!-- trigger modal -->
-                            <tr data-bs-toggle="modal" data-bs-target="#staticBackdrop-all-{{$product->id}}" style="cursor: pointer;">
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $product->product_name }}</td>
-                                <td>{{ $product->product_category }}</td>
-                                <td>{{ $product->product_price }}</td>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($products as $product)
+                    <!-- trigger modal -->
+                    <tr data-bs-toggle="modal" data-bs-target="#staticBackdrop-all-{{$product->id}}" style="cursor: pointer;">
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $product->product_name }}</td>
+                        <td>{{ $product->product_category }}</td>
+                        <td>{{ $product->price_view }}</td>
 
-                                <!-- Modal -->
-                                <div class="modal fade" id="staticBackdrop-all-{{$product->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                    <form action="/dinein/order/products/process" method="post">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Order Quantity</h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        <label for="staticEmail" class="col-sm-5 col-form-label">Product Name</label>
-                                                        <div class="col-sm-5">
-                                                            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{ $product->product_name }}">
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <label for="staticEmail" class="col-sm-5 col-form-label">Quantity</label>
-                                                        <div class="col-sm-5">
-                                                            <input type="number" value="1" min="1" max="100" name="quantity" id="quantity" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                    <input type="hidden" name="product_id" id="product_id" value="{{ $product->id }}">
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Add to Cart</button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="staticBackdrop-all-{{$product->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <form action="/dinein/order/products/process" method="post">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Order Quantity</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <label for="staticEmail" class="col-sm-5 col-form-label">Product Name</label>
+                                                <div class="col-sm-5">
+                                                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{ $product->product_name }}">
                                                 </div>
                                             </div>
+                                            <div class="row">
+                                                <label for="staticEmail" class="col-sm-5 col-form-label">Quantity</label>
+                                                <div class="col-sm-5">
+                                                    <input type="number" value="1" min="1" max="100" name="quantity" id="quantity" class="form-control">
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="product_id" id="product_id" value="{{ $product->id }}">
                                         </div>
-                                    </form>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn button">Add to Cart</button>
+                                        </div>
+                                    </div>
                                 </div>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+                            </form>
+                        </div>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </main>
     <footer>

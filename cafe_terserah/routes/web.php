@@ -3,7 +3,6 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DetailDineinTransactionController;
 use App\Http\Controllers\DineinTransactionController;
-use App\Http\Controllers\DineResController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReservationTransactionController;
 use App\Http\Controllers\SeatController;
