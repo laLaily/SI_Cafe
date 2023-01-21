@@ -11,6 +11,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <script>
         // function filter() {
         //     $.ajax({
@@ -132,7 +133,11 @@
                         <option value="beverage">beverage</option>
                         <option value="dessert">dessert</option>
                     </select>
-                    <button class="btn button" type="submit">Filter</button>
+                    <button class="btn button" type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-funnel-fill" viewBox="0 0 16 16">
+                            <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2z" />
+                        </svg>
+                    </button>
                 </div>
             </form>
             <!-- Button trigger modal -->
@@ -140,7 +145,7 @@
                 @foreach($transactions as $transaction)
                 <div class="btn-group" role="group" aria-label="Basic outlined example">
                     <button type="button" class="btn btn-outline-dark" disabled>{{ $totalProduct }}/{{ $transaction->price_view }}</button>
-                    <button type="button" class="btn button" data-bs-toggle="modal" data-bs-target="#cart">Cart</button>
+                    <button type="button" class="btn button las la-shopping-bag" data-bs-toggle="modal" data-bs-target="#cart"></button>
                 </div>
                 @endforeach
             </div>

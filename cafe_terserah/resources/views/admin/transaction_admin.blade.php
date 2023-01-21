@@ -74,7 +74,7 @@
                     <td>{{ $dinein->customer_name }}</td>
                     <td>{{ $dinein->transaction_date }}</td>
                     <td>{{ $dinein->seat_id }}</td>
-                    <td>{{ $dinein->total_price }}</td>
+                    <td>{{ $dinein->price_view }}</td>
                     <td>{{ $dinein->status }}</td>
                     <td>{{ $dinein->updated_at }}</td>
                     <td><a href="/admin/dineintrx/view/{{$dinein->id}}" class="btn btn-primary">view</a></td>

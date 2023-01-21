@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\DineinTransaction;
+use App\Models\Product;
+use App\Models\ReservationTransaction;
+use App\Models\Seat;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -19,7 +24,7 @@ class AdminController extends Controller
     public function getAdmins()
     {
         $admin = Admin::all();
-        return view('admin.admin_admin', ['admins'=>$admin]);
+        return view('admin.admin_admin', ['admins' => $admin]);
     }
 
     public function getAdmin(Request $request)
@@ -40,7 +45,6 @@ class AdminController extends Controller
     {
         $admin = Admin::find($id);
         $admin->delete();
-        return redirect('/admin/admin/view');
     }
 
     public function loginAdmin(Request $request)
@@ -60,8 +64,7 @@ class AdminController extends Controller
         $admin = Admin::where('username', $request->input("username"))->first();
 
         if (Hash::check($request->input('password'), $admin->password)) {
-            $request->session()->put('token', $admin->id);
-            return view ('admin.updatepassword_admin', ["admin" => $admin] );
+            return view('admin.updatepassword_admin', ["admin" => $admin]);
         } else {
             return redirect('/admin/admin_admin');
         }
@@ -70,7 +73,12 @@ class AdminController extends Controller
     public function dashboardAdmin(Request $request)
     {
         $admin = Admin::find($request->session()->get('token'));
-        return view('admin.dashboard_admin', ["admin" => $admin]);
+        $totalDinein = DineinTransaction::count();
+        $totalReservation = ReservationTransaction::count();
+        $totalProduct = Product::count();
+        $totalSeat = Seat::count();
+        $tanggalRekap = Carbon::now()->setTimezone('Asia/Phnom_Penh')->format('d-m-Y');
+        return view('admin.dashboard_admin', ["admin" => $admin, 'totalDinein' => $totalDinein, 'totalReservation' => $totalReservation, 'totalProduct' => $totalProduct, 'totalSeat' => $totalSeat, 'tanggalRekap' => $tanggalRekap]);
     }
 
     public function logoutAdmin(Request $request)

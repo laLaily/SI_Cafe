@@ -54,12 +54,12 @@ class DineinTransactionController extends Controller
     public function getDineinTransaction(Request $request)
     {
         if ($request->old('transaction_date') == null || $request->old('transaction_date') == "") {
-            $dinein = DineinTransaction::all();
+            $dinein = DineinTransaction::selectRaw("*,CONCAT('Rp.',FORMAT(total_price,0,'id_ID'),',-') as price_view")->get();
             return view('admin.transaction_admin', ['dineinTransactions' => $dinein]);
         } else {
             $data = $request->old('transaction_date');
             $dataArr = explode(',', $data);
-            $dinein = DineinTransaction::whereBetween('transaction_date', $dataArr)->get();
+            $dinein = DineinTransaction::selectRaw("*,CONCAT('Rp.',FORMAT(total_price,0,'id_ID'),',-') as price_view")->whereBetween('transaction_date', $dataArr)->get();
             return view('admin.transaction_admin', ['dineinTransactions' => $dinein])->render();
         }
     }

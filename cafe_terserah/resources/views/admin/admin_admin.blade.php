@@ -30,7 +30,7 @@
                     </button>
                 </td>
                 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <form action="/admin/checkPassword" method="post">
+                    <form action="/admin/password/check" method="post">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
