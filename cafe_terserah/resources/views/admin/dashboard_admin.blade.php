@@ -22,7 +22,7 @@
                         <span>Dashboard</span></a>
                 </li>
                 <li>
-                    <a href="/admin/view/{{ $admin->id }}"><span class="las la-users"></span>
+                    <a href="/admin/view"><span class="las la-users"></span>
                         <span>Data Admin</span></a>
                 </li>
                 <li>
@@ -74,7 +74,7 @@
         </header>
         <main>
             <div class="cards">
-                <a href="/admin/view/{{ $admin->id }}">
+                <a href="/admin/view">
                     <div class="cards-single">
                         <div>
                             <h1>3</h1>
