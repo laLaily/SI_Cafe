@@ -11,59 +11,52 @@
 </head>
 
 <body>
-    <p>aasad</p>
     <div>
-        <form action="">
-
-        
         @foreach ($dineintrx as $d)
-        <div>
-            <label  class="col-sm-5 col-form-label">Id</label>
+        <div class="row">
+            <label class="col-sm-5 col-form-label">Id</label>
             <div class="col-sm-5">
                 <input type="number" readonly class="form-control-plaintext" value="{{ $d->id }}">
             </div>
         </div>
 
-        <div>
-            <label  class="col-sm-5 col-form-label">Date</label>
+        <div class="row">
+            <label class="col-sm-5 col-form-label">Date</label>
             <div class="col-sm-5">
-                <input type="text" readonly class="form-control-plaintext"  value="{{ $d->transaction_date }}">
+                <input type="text" readonly class="form-control-plaintext" value="{{ $d->transaction_date }}">
             </div>
         </div>
 
-        <div>
-            <label  class="col-sm-5 col-form-label">Customer</label>
+        <div class="row">
+            <label class="col-sm-5 col-form-label">Customer</label>
             <div class="col-sm-5">
-                <input type="text" value="{{ $d->customer_name  }}" class="form-control">
-            </div>
-        </div>
-        
-        <div>
-            <label  class="col-sm-5 col-form-label">Seat</label>
-            <div class="col-sm-5">
-                <input type="text" value="{{ $d->seat_id  }}" class="form-control">
+                <input type="text" readonly class="form-control-plaintext" value=" {{ $d->customer_name  }}" class="form-control">
             </div>
         </div>
 
-        <div>
-            <label  class="col-sm-5 col-form-label">Total Price</label>
+        <div class="row">
+            <label class="col-sm-5 col-form-label">Seat</label>
             <div class="col-sm-5">
-                <input type="text" value="{{ $d->total_price  }}" class="form-control">
+                <input type="text" readonly class="form-control-plaintext" value=" {{ $d->seat_id  }}" class="form-control">
             </div>
         </div>
 
-        <div>
+        <div class="row">
+            <label class="col-sm-5 col-form-label">Total Price</label>
+            <div class="col-sm-5">
+                <input type="text" readonly class="form-control-plaintext" value=" {{ $d->price_view  }}" class="form-control">
+            </div>
+        </div>
+
+        <div class="row">
             <label class="col-sm-5 col-form-label">Status</label>
             <div class="col-sm-5">
-                <input type="text" value="{{ $d->status  }}" class="form-control">
+                <input type="text" readonly class="form-control-plaintext" value=" {{ $d->status  }}" class="form-control">
             </div>
         </div>
+        @endforeach
     </div>
-    @endforeach
-    </form>
-    </div>
-    
-    
+
     <div>
         <table class="table table-hover">
             <thead>
@@ -80,7 +73,7 @@
                     <tr>
                         <td>{{ $dinein->product_name }}</td>
                         <td>{{ $dinein->quantity }}</td>
-                        <td>{{ $dinein->quantity_price }}</td>
+                        <td>{{ $dinein->price_view }}</td>
                     </tr>
                 </form>
                 @endforeach

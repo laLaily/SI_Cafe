@@ -194,13 +194,12 @@ class DineinTransactionController extends Controller
 
     public function getOneTransactionWithProduct($id)
     {
-        $dinein = DineinTransaction::join('seats', 'seats.id', '=', 'dinein_transactions.seat_id')->where('id', $id);
+        $dinein = DineinTransaction::selectRaw("CONCAT('Rp.',FORMAT(dinein_transactions.total_price,0,'id_ID'),',-') as price_view,dinein_transactions.*, seats.seat_number")->join('seats', 'seats.id', '=', 'dinein_transactions.seat_id')->where('dinein_transactions.id', $id)->get();
         $dineins = DineinTransaction::join('detail_dinein_transactions', 'dinein_transactions.id', '=', 'detail_dinein_transactions.dinein_id')
             ->join('products', 'products.id', '=', 'detail_dinein_transactions.product_id')
-            ->select('detail_dinein_transactions.product_id', 'products.product_name', 'detail_dinein_transactions.quantity', 'detail_dinein_transactions.quantity_price')
+            ->selectRaw("CONCAT('Rp.',FORMAT(detail_dinein_transactions.quantity_price,0,'id_ID'),',-') as price_view, detail_dinein_transactions.product_id, products.product_name, detail_dinein_transactions.quantity, detail_dinein_transactions.quantity_price")
             ->where('dinein_transactions.id', $id)
             ->get();
-            
         return view('admin.detailtrx_admin', ['dineintrx' => $dinein, 'detail' => $dineins]);
     }
 
