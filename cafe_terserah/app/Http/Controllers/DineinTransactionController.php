@@ -200,7 +200,7 @@ class DineinTransactionController extends Controller
             ->select('detail_dinein_transactions.product_id', 'products.product_name', 'detail_dinein_transactions.quantity', 'detail_dinein_transactions.quantity_price')
             ->where('dinein_transactions.id', $id)
             ->get();
-
+            
         return view('admin.detailtrx_admin', ['dineintrx' => $dinein, 'detail' => $dineins]);
     }
 

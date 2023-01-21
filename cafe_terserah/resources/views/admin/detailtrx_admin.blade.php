@@ -11,30 +11,86 @@
 </head>
 
 <body>
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Quantity Price</th>
-            </tr>
-        </thead>
-        <tbody>
-            @isset($detail)
-            
-            @foreach ($detail as $dinein)
-            <form>
+    @foreach ($dineintrx as $a)
+    <p>{{ $a }} </p>
+    @endforeach
+    <div>
+        <form action="">
+            @foreach ($dineintrx as $d)
+            <div>
+                <label>Id</label>
+                <div>
+                    <input type="number" value="{{ $d->id }}">
+                </div>
+            </div>
+
+            <div>
+                <label>Date</label>
+                <div>
+                    <input type="text" value="{{ $d->transaction_date }}">
+                </div>
+            </div>
+
+            <div>
+                <label>Customer</label>
+                <div>
+                    <input type="text" value="{{ $d->customer_name  }}" class="form-control">
+                </div>
+            </div>
+
+            <div>
+                <label>Seat</label>
+                <div>
+                    <input type="text" value="{{ $d->seat_id  }}" class="form-control">
+                </div>
+            </div>
+
+            <div>
+                <label>Total Price</label>
+                <div>
+                    <input type="text" value="{{ $d->total_price  }}" class="form-control">
+                </div>
+            </div>
+
+            <div>
+                <label>Status</label>
+                <div>
+                    <input type="text" value="{{ $d->status  }}" class="form-control">
+                </div>
+            </div>
+    </div>
+    @endforeach
+    </form>
+    </div>
+
+
+    <div>
+        <table class="table table-hover">
+            <thead>
                 <tr>
-                    <td>{{ $dinein->product_name }}</td>
-                    <td>{{ $dinein->quantity }}</td>
-                    <td>{{ $dinein->quantity_price }}</td>
+                    <th scope="col">Name</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Quantity Price</th>
                 </tr>
-            </form>
-            @endforeach
-            
-            @endisset
-        </tbody>
-        </td>
-    </table>
+            </thead>
+            <tbody>
+                @isset($detail)
+                @foreach ($detail as $dinein)
+                <form>
+                    <tr>
+                        <td>{{ $dinein->product_name }}</td>
+                        <td>{{ $dinein->quantity }}</td>
+                        <td>{{ $dinein->quantity_price }}</td>
+                    </tr>
+                </form>
+                @endforeach
+
+                @endisset
+            </tbody>
+            </td>
+        </table>
+    </div>
+
 </body>
+
 </html>
