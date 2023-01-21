@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <form action="/update/process" method="post">
+    <form action="/admin/update/process" method="post">
         <div>
             <h1 class="modal-title fs-5" id="staticBackdropLabel">Enter New Password</h1>
         </div>

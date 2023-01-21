@@ -64,7 +64,6 @@ class AdminController extends Controller
         $admin = Admin::where('username', $request->input("username"))->first();
 
         if (Hash::check($request->input('password'), $admin->password)) {
-            $request->session()->put('token', $admin->id);
             return view('admin.updatepassword_admin', ["admin" => $admin]);
         } else {
             return redirect('/admin/admin_admin');
