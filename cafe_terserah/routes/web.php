@@ -31,12 +31,15 @@ Route::prefix('/admin')->group(function () {
         return view('admin.login_admin');
     });
     Route::post('/login/process', [AdminController::class, 'loginAdmin']);
+    
     Route::delete('/delete/{id}', [AdminController::class, 'deleteAdmin']);
 
     Route::middleware(['myauth'])->group(function () {
         Route::get('/dashboard', [AdminController::class, 'dashboardAdmin']);
-        Route::get('/view/{id}', [AdminController::class, 'getAdmin']);
-        Route::post('/update/process/{id}', [AdminController::class, 'updatePasswordAdmin']);
+        Route::post('/checkPassword', [AdminController::class, 'checkPassword']);
+        Route::get('/view', [AdminController::class, 'getAdmin']);
+        Route::post('/update/process', [AdminController::class, 'updatePasswordAdmin']);
+        
 
         Route::get('/logout', [AdminController::class, 'logoutAdmin']);
 
@@ -56,10 +59,8 @@ Route::prefix('/admin')->group(function () {
             Route::post('/update/process/{id}', [SeatController::class, 'updateSeat']);
         });
 
-        Route::prefix('/admin')->group(function () {
-            Route::get('/view/{id}', [AdminController::class, 'getAadmin']);
-            Route::post('/update/process/{id}', [AdminController::class, 'updatePasswordAdmin']);
-        });
+
+
 
         Route::prefix('/dineintrx')->group(function () {
             Route::get('/view', [DineinTransactionController::class, 'getDineinTransaction']);

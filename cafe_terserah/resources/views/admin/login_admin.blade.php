@@ -59,7 +59,7 @@
         .right img {
             width: 430px;
             height: 100%;
-            border-top-right-radius: 20px;
+            /* border border-top-right-radius: 20px; */
         }
 
         form label {
@@ -106,17 +106,17 @@
                 <hr>
                 <p>Login Admin Cafe Terserah</p>
                 <label for="username">Username</label>
-                <input type="text" name="username" id="username" placeholder="username">
+                <input type="text" name="username" id="username">
                 <label for="password">Password</label>
-                <input type="password" name="password" id="password" placeholder="password">
+                <input type="password" name="password" id="password">
                 <button type="submit">Login</button>
             </form>
         </div>
         <div class="right">
             <img src="icon.jpg" alt="">
-
         </div>
     </div>
 </body>
+
 
 </html>
