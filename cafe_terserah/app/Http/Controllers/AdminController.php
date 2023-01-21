@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\DineinTransaction;
+use App\Models\Product;
+use App\Models\ReservationTransaction;
+use App\Models\Seat;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -25,7 +30,7 @@ class AdminController extends Controller
     public function getAdmin($id)
     {
         $admin = Admin::find($id);
-        return view('admin.admin_admin', ['admin' => $admin]);
+        return view('admin.admin_profile', ['admin' => $admin]);
     }
 
     public function updatePasswordAdmin(Request $request)
@@ -39,7 +44,6 @@ class AdminController extends Controller
     {
         $admin = Admin::find($id);
         $admin->delete();
-        return redirect('/admin/admin/view');
     }
 
     public function loginAdmin(Request $request)
@@ -57,7 +61,12 @@ class AdminController extends Controller
     public function dashboardAdmin(Request $request)
     {
         $admin = Admin::find($request->session()->get('token'));
-        return view('admin.dashboard_admin', ["admin" => $admin]);
+        $totalDinein = DineinTransaction::count();
+        $totalReservation = ReservationTransaction::count();
+        $totalProduct = Product::count();
+        $totalSeat = Seat::count();
+        $tanggalRekap = Carbon::now()->setTimezone('Asia/Phnom_Penh')->format('d-m-Y');
+        return view('admin.dashboard_admin', ["admin" => $admin, 'totalDinein' => $totalDinein, 'totalReservation' => $totalReservation, 'totalProduct' => $totalProduct, 'totalSeat' => $totalSeat, 'tanggalRekap' => $tanggalRekap]);
     }
 
     public function logoutAdmin(Request $request)

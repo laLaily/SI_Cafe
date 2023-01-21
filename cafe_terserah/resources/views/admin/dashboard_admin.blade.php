@@ -46,7 +46,7 @@
                         <span>Data Recap Transaction</span></a>
                 </li>
                 <li>
-                    <a href="/admin/logout"><span class="las la-shopping-bag"></span>
+                    <a href="/admin/logout"><span class="las la-sign-out-alt"></span>
                         <span>Logout</span></a>
                 </li>
             </ul>
@@ -77,7 +77,7 @@
                 <a href="/admin/view/{{ $admin->id }}">
                     <div class="cards-single">
                         <div>
-                            <h1>3</h1>
+                            <h1>{{ $admin->id }}</h1>
                             <span>Admin</span>
                         </div>
                         <div>
@@ -88,8 +88,8 @@
                 <a href="/admin/dineintrx/view">
                     <div class="cards-single">
                         <div>
-                            <h1>135</h1>
-                            <span>Transaksi</span>
+                            <h1>{{ $totalDinein }}</h1>
+                            <span>Dine-in Transaction</span>
                         </div>
                         <div>
                             <span class="las la-shopping-cart"></span>
@@ -99,8 +99,8 @@
                 <a href="/admin/reservationtrx/view">
                     <div class="cards-single">
                         <div>
-                            <h1>70</h1>
-                            <span>Reservasi</span>
+                            <h1>{{ $totalReservation }}</h1>
+                            <span>Reservation</span>
                         </div>
                         <div>
                             <span class="las la-plus"></span>
@@ -110,8 +110,8 @@
                 <a href="/admin/product/view">
                     <div class="cards-single">
                         <div>
-                            <h1>20</h1>
-                            <span>Produk</span>
+                            <h1>{{ $totalProduct }}</h1>
+                            <span>Product</span>
                         </div>
                         <div>
                             <span class="las la-hamburger"></span>
@@ -121,7 +121,7 @@
                 <a href="/admin/seat/view">
                     <div class="cards-single">
                         <div>
-                            <h1>140</h1>
+                            <h1>{{ $totalSeat }}</h1>
                             <span>Seat</span>
                         </div>
                         <div>
@@ -132,7 +132,7 @@
                 <a href="/admin/dineintrx/recap">
                     <div class="cards-single">
                         <div>
-                            <h1>135</h1>
+                            <h1>{{ $tanggalRekap }}</h1>
                             <span>Recap</span>
                         </div>
                         <div>
