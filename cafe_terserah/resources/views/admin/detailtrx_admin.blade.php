@@ -11,59 +11,59 @@
 </head>
 
 <body>
-    @foreach ($dineintrx as $a)
-    <p>{{ $a }} </p>
-    @endforeach
+    <p>aasad</p>
     <div>
         <form action="">
-            @foreach ($dineintrx as $d)
-            <div>
-                <label>Id</label>
-                <div>
-                    <input type="number" value="{{ $d->id }}">
-                </div>
-            </div>
 
-            <div>
-                <label>Date</label>
-                <div>
-                    <input type="text" value="{{ $d->transaction_date }}">
-                </div>
+        
+        @foreach ($dineintrx as $d)
+        <div>
+            <label  class="col-sm-5 col-form-label">Id</label>
+            <div class="col-sm-5">
+                <input type="number" readonly class="form-control-plaintext" value="{{ $d->id }}">
             </div>
+        </div>
 
-            <div>
-                <label>Customer</label>
-                <div>
-                    <input type="text" value="{{ $d->customer_name  }}" class="form-control">
-                </div>
+        <div>
+            <label  class="col-sm-5 col-form-label">Date</label>
+            <div class="col-sm-5">
+                <input type="text" readonly class="form-control-plaintext"  value="{{ $d->transaction_date }}">
             </div>
+        </div>
 
-            <div>
-                <label>Seat</label>
-                <div>
-                    <input type="text" value="{{ $d->seat_id  }}" class="form-control">
-                </div>
+        <div>
+            <label  class="col-sm-5 col-form-label">Customer</label>
+            <div class="col-sm-5">
+                <input type="text" value="{{ $d->customer_name  }}" class="form-control">
             </div>
+        </div>
+        
+        <div>
+            <label  class="col-sm-5 col-form-label">Seat</label>
+            <div class="col-sm-5">
+                <input type="text" value="{{ $d->seat_id  }}" class="form-control">
+            </div>
+        </div>
 
-            <div>
-                <label>Total Price</label>
-                <div>
-                    <input type="text" value="{{ $d->total_price  }}" class="form-control">
-                </div>
+        <div>
+            <label  class="col-sm-5 col-form-label">Total Price</label>
+            <div class="col-sm-5">
+                <input type="text" value="{{ $d->total_price  }}" class="form-control">
             </div>
+        </div>
 
-            <div>
-                <label>Status</label>
-                <div>
-                    <input type="text" value="{{ $d->status  }}" class="form-control">
-                </div>
+        <div>
+            <label class="col-sm-5 col-form-label">Status</label>
+            <div class="col-sm-5">
+                <input type="text" value="{{ $d->status  }}" class="form-control">
             </div>
+        </div>
     </div>
     @endforeach
     </form>
     </div>
-
-
+    
+    
     <div>
         <table class="table table-hover">
             <thead>
