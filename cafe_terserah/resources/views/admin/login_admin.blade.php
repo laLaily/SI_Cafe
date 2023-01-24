@@ -19,7 +19,7 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background: #FFE6BC;
+            background: #EED6C4;
         }
 
         .container {
@@ -59,7 +59,7 @@
         .right img {
             width: 430px;
             height: 100%;
-            /* border border-top-right-radius: 20px; */
+            border-top-right-radius: 20px;
         }
 
         form label {
@@ -76,7 +76,7 @@
             outline: none;
             padding: 8px;
             border-radius: 5px;
-            border: 1px solid gray;
+            border: 1px solid #6B4F4F;
         }
 
         button {
@@ -89,13 +89,14 @@
             cursor: pointer;
             margin-top: 20px;
             border-radius: 5px;
-            background: #FFE6BC;
+            background: #6B4F4F;
         }
 
         button:hover {
-            background: #8E806A;
+            background: #FFE6BC;
         }
     </style>
+
 </head>
 
 <body>

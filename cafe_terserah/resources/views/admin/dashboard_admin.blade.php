@@ -10,6 +10,54 @@
     <link rel="stylesheet" href="{{ mix('css/styledashboard.css') }}">
 </head>
 
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+
+    .sidebar a,
+        .sidebar li {
+            list-style-type: none;
+            text-decoration: none;
+        }
+
+    .cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    .cards a {
+        color: #FFF3E4;
+        text-decoration: none;
+    }
+
+    .cards-single {
+        display: flex;
+        justify-content: space-between;
+        background: #6B4F4F;
+        padding: 2rem;
+        border-radius: 2px;
+    }
+
+    .cards-single div:last-child span {
+        font-size: 3rem;
+        color: #FFF3E4;
+    }
+
+    .cards-single div:first-child span {
+        color: #D0B8A8;
+    }
+
+    body {
+        background-color: #EED6C4;
+    }
+</style>
+
 <body>
     <div class="sidebar">
         <div class="sidebar-brand">
@@ -60,15 +108,12 @@
                 </label>
                 Dashboard
             </h2>
-            <div class="search-wrapper">
-                <span class="las la-search"></span>
-                <input type="search" placeholder="Search Here">
-            </div>
+            <h1>CAFE TERSERAH</h1>
             <div class="user-wrapper">
                 <img src="bestot.JPG" width="40px" height="40px" alt="">
                 <div>
                     <h4>bestot</h4>
-                    <small>Super Admin</small>
+                    <p>Super Admin</p>
                 </div>
             </div>
         </header>
