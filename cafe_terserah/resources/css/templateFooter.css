@@ -1,0 +1,17 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: "Comic sans ms";
+}
+
+footer{
+    background-color: #483434;
+    color: #EED6C4;
+    text-align: center;
+}
+
+footer h1{
+    font-size: 15px;
+    padding: 5px;
+    font-weight: bold;
+}
