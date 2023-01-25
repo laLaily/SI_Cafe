@@ -84,7 +84,7 @@
             </h2>
             <h1>CAFE TERSERAH</h1>
             <div class="user-wrapper">
-                <img src="bestot.JPG" width="40px" height="40px" alt="">
+                <img src="logo1.png" width="40px" height="40px" alt="profile">
                 <div class="profile-wrapper">
                     <h4>bestot</h4>
                     <small>Super Admin</small>
@@ -131,11 +131,11 @@
                                     <div class="row">
                                         <label for="staticEmail" class="col-sm-5 col-form-label">Last Password</label>
                                         <div class="col-sm-5">
-                                            <input type="password" name="password" id="password">
+                                            <input type="password" name="password" id="password" class="form-control">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="modal-footer">
+                                <div class=" modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                     <button class="btn btn-primary" type="submit">Continue</button>
                                 </div>

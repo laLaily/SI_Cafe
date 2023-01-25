@@ -103,7 +103,7 @@
                 <h2>CAFE TERSERAH</h2>
             </div>
             <div class="user-wrapper">
-                <img src="bestot.JPG" width="40px" height="40px" alt="">
+                <img src="logo1.png" width="40px" height="40px" alt="profile">
                 <div class="profile-wrapper">
                     <h4>bestot</h4>
                     <small>Super Admin</small>

@@ -115,7 +115,7 @@
             </form>
         </div>
         <div class="right">
-            <img src="icon.jpg" alt="">
+            <img src="logo1.png" alt="logo-cafe">
         </div>
     </div>
 </body>

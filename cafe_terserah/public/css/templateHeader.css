@@ -1,10 +1,10 @@
-*{
+* {
     margin: 0;
     padding: 0;
     font-family: "Comic sans ms";
 }
 
-header{
+header {
     display: flex;
     justify-content: space-between;
     background-color: #483434;
@@ -14,8 +14,8 @@ header{
     padding: 10px;
 }
 
-.judul{
-    color: #FFF3E4;
+.judul {
+    color: #fff3e4;
     margin: 5px;
 }
 
@@ -24,34 +24,35 @@ header{
     font-weight: bold;
 }
 
-.logo{
-    margin: 10px;    
-}
-
-.galeri{
+.logo {
     margin: 10px;
 }
 
-.galeri a{
+.galeri {
+    margin: 10px;
+}
+
+.galeri a {
     color: #483434;
     font-weight: bold;
     font-size: 15px;
     padding: 10px 20px;
-    border: 2px solid #FFF3E4;
+    border: 2px solid #fff3e4;
     border-radius: 15px;
-    background-color: #EED6C4;
+    background-color: #eed6c4;
     text-decoration: none;
 }
 
-.galeri a:hover{
-    border: 2px solid #EED6C4;
-    background-color: #6B4F4F;
-    color: #EED6C4;
+.galeri a:hover {
+    border: 2px solid #eed6c4;
+    background-color: #6b4f4f;
+    color: #eed6c4;
     transition: 0.5s;
 }
 
-@media (max-width:600px) {
-    .judul{
+@media (max-width: 600px) {
+    .judul {
         display: none;
     }
 }
+
