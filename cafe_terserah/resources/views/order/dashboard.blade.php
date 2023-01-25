@@ -13,7 +13,7 @@
 <body>
     <header>
         <div class="logo">
-            <a href="/"><img src="" alt="logo-cafe"></a>
+            <a href="/"><img src="logo1.png" alt="logo-cafe" width="40px" height="40px"></a>
         </div>
         <div class="judul">
             <h1>CAFE TERSERAH</h1>
@@ -61,7 +61,7 @@
                 </div>
             </section>
             <section class="cafe-image">
-                <img src="./assets/images/gambarCafe.jpeg" alt="gambar-cafe">
+                <img src="logo.png" alt="gambar-cafe">
             </section>
         </section>
         <section class="booking">

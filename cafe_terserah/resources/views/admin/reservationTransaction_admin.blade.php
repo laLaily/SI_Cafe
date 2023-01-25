@@ -121,6 +121,7 @@
                             <th scope="col">Person</th>
                             <th scope="col">Dine In Id</th>
                             <th scope="col">Status</th>
+                            <th scope="col">Updated at</th>
                             <th scope="col">Dine In</th>
                             <th scope="col">Update Status</th>
                         </tr>
@@ -135,6 +136,7 @@
                             <td>{{ $r->total_person }}</td>
                             <td>{{ $r->dinein_id }}</td>
                             <td>{{ $r->status }}</td>
+                            <td>{{ $r->updated_at }}</td>
                             <td>
                                 <a href="/admin/reservationtrx/view/{{ $r->id }}">
                                     <button class="btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{$r->id}}">

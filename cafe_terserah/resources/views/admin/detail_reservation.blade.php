@@ -71,13 +71,13 @@
             <a href="/admin/dashboard"><span class="las la-igloo"></span>
                 <span>Dashboard</span></a>
 
-            <a href="/admin/view" class="active"><span class="las la-users"></span>
+            <a href="/admin/view"><span class="las la-users"></span>
                 <span>Data Admin</span></a>
 
             <a href="/admin/dineintrx/view"><span class="las la-shopping-cart"></span>
                 <span>Data Transaksi</span></a>
 
-            <a href="/admin/reservationtrx/view"><span class="las la-plus"></span>
+            <a href="/admin/reservationtrx/view" class="active"><span class="las la-plus"></span>
                 <span>Data Reservasi</span></a>
 
             <a href="/admin/product/view"><span class="las la-hamburger"></span>
