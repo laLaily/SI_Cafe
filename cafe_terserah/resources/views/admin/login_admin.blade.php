@@ -19,7 +19,7 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background: #EED6C4;
+            background-color: #EED6C4;
         }
 
         .container {
@@ -48,7 +48,7 @@
         }
 
         hr {
-            border-top: 2px solid #FFE6BC;
+            border-top: 2px solid #EED6C4;
         }
 
         p {
@@ -89,11 +89,12 @@
             cursor: pointer;
             margin-top: 20px;
             border-radius: 5px;
-            background: #6B4F4F;
+            border: 2px solid #EED6C4;
+            background-color: #EED6C4;
         }
 
         button:hover {
-            background: #FFE6BC;
+            background: #FFF3E4;
         }
     </style>
 

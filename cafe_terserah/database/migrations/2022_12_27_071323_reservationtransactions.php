@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create("reservation_transactions", function (Blueprint $table) {
             $table->id();
             $table->string("customer_name");
-            $table->timestamp("reservation_date");
+            $table->timestamp("reservation_date")->useCurrent();
             $table->integer("total_person");
             $table->unsignedBigInteger("dinein_id")->nullable();
             $table->foreign("dinein_id")->references("id")->on("dinein_transactions");

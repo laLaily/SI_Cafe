@@ -55,7 +55,7 @@ class AdminController extends Controller
             $request->session()->put('token', $admin->id);
             return redirect('/admin/dashboard');
         } else {
-            return view('/admin/login');
+            return redirect('/admin/login');
         }
     }
 

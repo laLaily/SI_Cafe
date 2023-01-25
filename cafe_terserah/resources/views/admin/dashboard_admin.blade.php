@@ -19,10 +19,10 @@
     }
 
     .sidebar a,
-        .sidebar li {
-            list-style-type: none;
-            text-decoration: none;
-        }
+    .sidebar li {
+        list-style-type: none;
+        text-decoration: none;
+    }
 
     .cards {
         display: grid;
@@ -64,40 +64,29 @@
             <h2><span class="las la-accusoft"></span>Menu Admin</h2>
         </div>
         <div class="sidebar-menu">
-            <ul>
-                <li>
-                    <a href="/admin/dashboard" class="active"><span class="las la-igloo"></span>
-                        <span>Dashboard</span></a>
-                </li>
-                <li>
-                    <a href="/admin/view"><span class="las la-users"></span>
-                        <span>Data Admin</span></a>
-                </li>
-                <li>
-                    <a href="/admin/dineintrx/view"><span class="las la-shopping-cart"></span>
-                        <span>Data Transaksi</span></a>
-                </li>
-                <li>
-                    <a href="/admin/reservationtrx/view"><span class="las la-plus"></span>
-                        <span>Data Reservasi</span></a>
-                </li>
-                <li>
-                    <a href="/admin/product/view"><span class="las la-hamburger"></span>
-                        <span>Data Produk</span></a>
-                </li>
-                <li>
-                    <a href="/admin/seat/view"><span class="las la-chair"></span>
-                        <span>Data Seat</span></a>
-                </li>
-                <li>
-                    <a href="/admin/dineintrx/recap"><span class="las la-shopping-bag"></span>
-                        <span>Data Recap Transaction</span></a>
-                </li>
-                <li>
-                    <a href="/admin/logout"><span class="las la-sign-out-alt"></span>
-                        <span>Logout</span></a>
-                </li>
-            </ul>
+            <a href="/admin/dashboard" class="active"><span class="las la-igloo"></span>
+                <span>Dashboard</span></a>
+
+            <a href="/admin/view"><span class="las la-users"></span>
+                <span>Data Admin</span></a>
+
+            <a href="/admin/dineintrx/view"><span class="las la-shopping-cart"></span>
+                <span>Data Transaksi</span></a>
+
+            <a href="/admin/reservationtrx/view"><span class="las la-plus"></span>
+                <span>Data Reservasi</span></a>
+
+            <a href="/admin/product/view"><span class="las la-hamburger"></span>
+                <span>Data Produk</span></a>
+
+            <a href="/admin/seat/view"><span class="las la-chair"></span>
+                <span>Data Seat</span></a>
+
+            <a href="/admin/dineintrx/recap"><span class="las la-shopping-bag"></span>
+                <span>Data Recap Transaction</span></a>
+
+            <a href="/admin/logout"><span class="las la-sign-out-alt"></span>
+                <span>Logout</span></a>
         </div>
     </div>
     <div class="main-content">
@@ -111,9 +100,9 @@
             <h1>CAFE TERSERAH</h1>
             <div class="user-wrapper">
                 <img src="bestot.JPG" width="40px" height="40px" alt="">
-                <div>
+                <div class="profile-wrapper">
                     <h4>bestot</h4>
-                    <p>Super Admin</p>
+                    <small>Super Admin</small>
                 </div>
             </div>
         </header>

@@ -29,7 +29,7 @@
         .reservation {
             margin: 10px;
             overflow-y: scroll;
-            height: 450px;
+            height: 400px;
             border: 2px solid #483434;
         }
 
@@ -46,13 +46,13 @@
             background-color: #EED6C4;
         }
 
-        .btn{
+        .btn {
             background-color: #483434;
             color: white;
             border: 2px solid #483434;
         }
-        
-        .btn:hover{
+
+        .btn:hover {
             background-color: white;
             border: 2px solid #483434;
             color: #483434;
@@ -66,40 +66,29 @@
             <h2><span class="las la-accusoft"></span>Menu Admin</h2>
         </div>
         <div class="sidebar-menu">
-            <ul>
-                <li>
-                    <a href="/admin/dashboard" class="active"><span class="las la-igloo"></span>
-                        <span>Dashboard</span></a>
-                </li>
-                <li>
-                    <a href="/admin/view"><span class="las la-users"></span>
-                        <span>Data Admin</span></a>
-                </li>
-                <li>
-                    <a href="/admin/dineintrx/view"><span class="las la-shopping-cart"></span>
-                        <span>Data Transaksi</span></a>
-                </li>
-                <li>
-                    <a href="/admin/reservationtrx/view"><span class="las la-plus"></span>
-                        <span>Data Reservasi</span></a>
-                </li>
-                <li>
-                    <a href="/admin/product/view"><span class="las la-hamburger"></span>
-                        <span>Data Produk</span></a>
-                </li>
-                <li>
-                    <a href="/admin/seat/view"><span class="las la-chair"></span>
-                        <span>Data Seat</span></a>
-                </li>
-                <li>
-                    <a href="/admin/dineintrx/recap"><span class="las la-shopping-bag"></span>
-                        <span>Data Recap Transaction</span></a>
-                </li>
-                <li>
-                    <a href="/admin/logout"><span class="las la-sign-out-alt"></span>
-                        <span>Logout</span></a>
-                </li>
-            </ul>
+            <a href="/admin/dashboard"><span class="las la-igloo"></span>
+                <span>Dashboard</span></a>
+
+            <a href="/admin/view"><span class="las la-users"></span>
+                <span>Data Admin</span></a>
+
+            <a href="/admin/dineintrx/view"><span class="las la-shopping-cart"></span>
+                <span>Data Transaksi</span></a>
+
+            <a href="/admin/reservationtrx/view" class="active"><span class="las la-plus"></span>
+                <span>Data Reservasi</span></a>
+
+            <a href="/admin/product/view"><span class="las la-hamburger"></span>
+                <span>Data Produk</span></a>
+
+            <a href="/admin/seat/view"><span class="las la-chair"></span>
+                <span>Data Seat</span></a>
+
+            <a href="/admin/dineintrx/recap"><span class="las la-shopping-bag"></span>
+                <span>Data Recap Transaction</span></a>
+
+            <a href="/admin/logout"><span class="las la-sign-out-alt"></span>
+                <span>Logout</span></a>
         </div>
     </div>
     <div class="main-content">
@@ -115,7 +104,7 @@
             </div>
             <div class="user-wrapper">
                 <img src="bestot.JPG" width="40px" height="40px" alt="">
-                <div>
+                <div class="profile-wrapper">
                     <h4>bestot</h4>
                     <small>Super Admin</small>
                 </div>
@@ -139,7 +128,7 @@
                     <tbody>
                         @foreach ($reservations as $r)
                         <!-- trigger modal -->
-                        <tr data-bs-toggle="modal" style="cursor: pointer;">
+                        <tr data-bs-toggle="modal">
                             <td>{{ $r->id }}</td>
                             <td>{{ $r->reservation_date }}</td>
                             <td>{{ $r->customer_name }}</td>
@@ -148,15 +137,19 @@
                             <td>{{ $r->status }}</td>
                             <td>
                                 <button class="btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{$r->id}}">
-                                    View Dine In
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                                        <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                                    </svg>
                                 </button>
-
                             </td>
                             <td>
                                 <button class="btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{$r->id}}">
-                                    Update Status
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16">
+                                        <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z" />
+                                        <path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z" />
+                                    </svg>
                                 </button>
-
                             </td>
                         </tr>
                         @endforeach
