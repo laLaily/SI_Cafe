@@ -72,6 +72,7 @@ Route::prefix('/admin')->group(function () {
 
         Route::prefix('/reservationtrx')->group(function () {
             Route::get('/view', [ReservationTransactionController::class, 'getReservationTransactions']);
+            Route::get('/view/{id}', [ReservationTransactionController::class, 'getReservationTransactionsUser']);
         });
     });
 });

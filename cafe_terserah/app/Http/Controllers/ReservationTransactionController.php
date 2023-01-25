@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DineinTransaction;
 use App\Models\ReservationTransaction;
 use Illuminate\Http\Request;
 
@@ -50,9 +51,33 @@ class ReservationTransactionController extends Controller
         return redirect('/');
     }
 
-    public function getReservationTransactions(){
+    public function getReservationTransactions()
+    {
         $reservations = ReservationTransaction::all();
-        return view('admin.reservationTransaction_admin', ['reservations'=>$reservations]);
+        return view('admin.reservationTransaction_admin', ['reservations' => $reservations]);
     }
 
+    public function getReservationTransactionsUser($id)
+    {
+        $reservations = ReservationTransaction::select('reservation_transactions.id as rid', 'reservation_transactions.customer_name', 'reservation_transactions.reservation_date', 'reservation_transactions.status', 'reservation_transactions.total_person', 'dinein_transactions.id as did', 'seats.seat_number', 'dinein_transactions.total_price')->join('dinein_transactions', 'dinein_transactions.id', '=', 'reservation_transactions.dinein_id', 'left')->join('seats', 'seats.id', '=', 'dinein_transactions.seat_id', 'left')->where('reservation_transactions.id', '=', $id)->get();
+
+        $dineinId = null;
+        foreach ($reservations as $reservation) {
+            if ($reservation->did != null) {
+                $dineinId = $reservation->did;
+            }
+        }
+
+        if ($dineinId == null) {
+            return view('admin.detail_reservation', ['reservations' => $reservations]);
+        } else {
+            $dineins = DineinTransaction::join('detail_dinein_transactions', 'dinein_transactions.id', '=', 'detail_dinein_transactions.dinein_id')
+                ->join('products', 'products.id', '=', 'detail_dinein_transactions.product_id')
+                ->selectRaw("CONCAT('Rp.',FORMAT(detail_dinein_transactions.quantity_price,0,'id_ID'),',-') as price_view, detail_dinein_transactions.product_id, products.product_name, detail_dinein_transactions.quantity, detail_dinein_transactions.quantity_price")
+                ->where('dinein_transactions.id', $dineinId)
+                ->get();
+
+            return view('admin.detail_reservation', ['reservations' => $reservations, 'dineins' => $dineins]);
+        }
+    }
 }
